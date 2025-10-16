@@ -70,7 +70,7 @@ Comments can be added as C comment blocks
 // cannot be used as comments
 */
 
-/*Comments can also be on a single line*/
+/*Comments can also be on a single line.*/
 
 
 === TRAINER_NONE ===
