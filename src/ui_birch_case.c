@@ -471,6 +471,28 @@ static void BirchCase_GiveMon() // Function that calls the GiveMon function pull
                 sStarterChoices[sBirchCaseDataPtr->handPosition].gender, evs, ivs, moves, \
                 sStarterChoices[sBirchCaseDataPtr->handPosition].ggMaxFactor, sStarterChoices[sBirchCaseDataPtr->handPosition].teraType,\
                 sStarterChoices[sBirchCaseDataPtr->handPosition].isShinyExpansion);
+
+    struct Pokemon *mon = &gPlayerParty[0]; // jd: get the first (only) mon in the party and then lookup to get its name
+    u16 selectedStarterSpecies = GetMonData(mon,MON_DATA_SPECIES);
+
+    switch (selectedStarterSpecies)
+    {
+        case SPECIES_GROOKEY:
+        case SPECIES_SPRIGATITO:
+        case SPECIES_ROWLET:
+            VarSet(VAR_STARTER_MON, 0); // Rival has Fuecoco
+            break;
+        case SPECIES_SCORBUNNY:
+        case SPECIES_FUECOCO:
+        case SPECIES_CYNDAQUIL:
+            VarSet(VAR_STARTER_MON, 1); // Rival has Oshawott
+            break;
+        case SPECIES_SOBBLE:
+        case SPECIES_QUAXLY:
+        case SPECIES_OSHAWOTT:
+            VarSet(VAR_STARTER_MON, 2); // Rival has Grookey
+            break;
+    }
 }
 
 //==========FUNCTIONS==========//
