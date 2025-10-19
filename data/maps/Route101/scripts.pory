@@ -221,13 +221,25 @@ Route101_EventScript_BirchsBag::
 	faceplayer
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_RESCUED_BIRCH
-	fadescreen FADE_TO_BLACK
-	removeobject LOCALID_ROUTE101_ZIGZAGOON
-	setobjectxy LOCALID_PLAYER, 6, 13
+	callnative StartNewPokeballCaseUI
+	waitstate
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	special ChooseStarter
-	waitstate
+	msgbox Route101_Text_DistractIt, MSGBOX_DEFAULT
+	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonApproach
+	waitmovement 0
+	setwildbattle SPECIES_ZIGZAGOON_GALAR, 3
+	playmoncry SPECIES_ZIGZAGOON_GALAR, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
+	dowildbattle
+	playbgm MUS_ROUTE101, TRUE
+	delay 10
+	applymovement LOCALID_ROUTE101_ZIGZAGOON, Route101_Movement_ZigzagoonFlee
+	waitmovement 0
+	removeobject LOCALID_ROUTE101_ZIGZAGOON
 	applymovement LOCALID_ROUTE101_BIRCH, Route101_Movement_BirchApproachPlayer
 	waitmovement 0
 	msgbox Route101_Text_YouSavedMe, MSGBOX_DEFAULT
@@ -246,6 +258,31 @@ Route101_EventScript_BirchsBag::
 	release
 	end
 
+Route101_Movement_ZigzagoonApproach:
+	walk_fast_down
+	walk_fast_down
+	walk_right
+	walk_in_place_fast_right
+	step_end
+	
+Route101_Movement_ZigzagoonFlee:
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_right
+	walk_fast_down
+	step_end
+
 Route101_EventScript_HideMayInBedroom::
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	return
@@ -256,6 +293,10 @@ Route101_EventScript_HideBrendanInBedroom::
 
 Route101_Movement_BirchApproachPlayer:
 	walk_right
+	walk_right
+	walk_down
+	walk_down
+	face_right
 	step_end
 
 Route101_Text_HelpMe:
@@ -266,6 +307,9 @@ Route101_Text_PleaseHelp:
 	.string "Please! Help!\p"
 	.string "In my BAG!\n"
 	.string "There's a POKé BALL!$"
+
+Route101_Text_DistractIt:
+	.string "Quick, distract it!$"
 
 Route101_Text_DontLeaveMe:
 	.string "Wh-Where are you going?!\n"

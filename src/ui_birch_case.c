@@ -132,19 +132,17 @@ struct MonChoiceData{ // This is the format used to define a mon, everything lef
 //
 static const struct MonChoiceData sStarterChoices[9] = 
 {
-    [BALL_TOP_FIRST]        = {SPECIES_MUDKIP, 5, ITEM_POTION, BALL_NET, NATURE_JOLLY, 1, MON_MALE, {255, 255, 0, 0, 0, 0}, {31, 31, 31, 31, 31, 31}, {MOVE_FIRE_BLAST, MOVE_SHEER_COLD, MOVE_WATER_GUN, MOVE_THUNDER}, 0, 0, 0},
- 
-    [BALL_TOP_FIRST]        = {SPECIES_GROOKEY, 5},
-    [BALL_TOP_SECOND]       = {SPECIES_SCORBUNNY, 5},
-    [BALL_MIDDLE_FIRST]     = {SPECIES_SOBBLE, 5},
+    [BALL_TOP_FIRST]        = {SPECIES_GROOKEY, 5, .nature = NUM_NATURES, .ivs = {255, 255, 255, 255, 255, 255}},
+    [BALL_TOP_SECOND]       = {SPECIES_SCORBUNNY, 5, .nature = NUM_NATURES, .ivs = {255, 255, 255, 255, 255, 255}},
+    [BALL_MIDDLE_FIRST]     = {SPECIES_SOBBLE, 5, .nature = NUM_NATURES, .ivs = {255, 255, 255, 255, 255, 255}},
 
-    [BALL_TOP_THIRD]        = {SPECIES_SPRIGATITO, 5},
-    [BALL_TOP_FOURTH]       = {SPECIES_FUECOCO, 5},
-    [BALL_MIDDLE_THIRD]     = {SPECIES_QUAXLY, 5},
+    [BALL_TOP_THIRD]        = {SPECIES_SPRIGATITO, 5, .nature = NUM_NATURES, .ivs = {255, 255, 255, 255, 255, 255}},
+    [BALL_TOP_FOURTH]       = {SPECIES_FUECOCO, 5, .nature = NUM_NATURES, .ivs = {255, 255, 255, 255, 255, 255}},
+    [BALL_MIDDLE_THIRD]     = {SPECIES_QUAXLY, 5, .nature = NUM_NATURES, .ivs = {255, 255, 255, 255, 255, 255}},
 
-    [BALL_MIDDLE_SECOND]    = {SPECIES_ROWLET, 5},
-    [BALL_BOTTOM_FIRST]     = {SPECIES_CYNDAQUIL, 5},
-    [BALL_BOTTOM_SECOND]    = {SPECIES_OSHAWOTT, 5},
+    [BALL_MIDDLE_SECOND]    = {SPECIES_ROWLET, 5, .nature = NUM_NATURES, .ivs = {255, 255, 255, 255, 255, 255}},
+    [BALL_BOTTOM_FIRST]     = {SPECIES_CYNDAQUIL, 5, .nature = NUM_NATURES, .ivs = {255, 255, 255, 255, 255, 255}},
+    [BALL_BOTTOM_SECOND]    = {SPECIES_OSHAWOTT, 5, .nature = NUM_NATURES, .ivs = {255, 255, 255, 255, 255, 255}},
 };
 
 //==========EWRAM==========//
