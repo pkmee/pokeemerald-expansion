@@ -361,7 +361,7 @@ Route109_EventScript_Zigzagoon::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
+	playmoncry SPECIES_ZIGZAGOON_GALAR, CRY_MODE_NORMAL
 	msgbox Route109_Text_ZigzagoonCry, MSGBOX_DEFAULT
 	waitmoncry
 	release
@@ -550,7 +550,7 @@ Route109_Text_ZigzagoonPicksUpLitter:
 	.string "back to haunt us eventually.$"
 
 Route109_Text_ZigzagoonCry:
-	.string "ZIGZAGOON: Guguu?$"
+	.string "ZIGZAGOON: Ruruu?$"
 
 Route109_Text_SeashoreHouseSign:
 	.string "SEASHORE HOUSE\p"

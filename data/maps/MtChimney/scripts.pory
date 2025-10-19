@@ -664,7 +664,7 @@ MtChimney_Text_KeepMakingMoreLand:
 	.string "We're going to keep making more land!$"
 
 MtChimney_Text_Bufoh:
-	.string "Bufoh!$"
+	.string "Ninii!$"
 
 MtChimney_Text_ArchieGoStopTeamMagma:
 	.string "ARCHIE: Grr, {PLAYER}!\n"
@@ -710,7 +710,7 @@ MtChimney_Text_MagmasNameSimilar:
 	.string "a confusing name!$"
 
 MtChimney_Text_Bushaa:
-	.string "Bushaa!$"
+	.string "Nii!$"
 
 MtChimney_Text_LavaCookiesJust200:
 	.string "LAVA COOKIES are MT. CHIMNEY's local\n"
