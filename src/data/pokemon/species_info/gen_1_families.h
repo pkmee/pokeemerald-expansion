@@ -12841,7 +12841,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .height = 5,
         .weight = 130,
         .description = COMPOUND_STRING(
-            "It esembles an ancient Poké Ball design.\n"
+            "It resembles an ancient Poké Ball design.\n"
             "When excited, it discharges the electric\n"
             "current it has stored in its belly, then\n"
             "lets out a great, uproarious laugh."),
@@ -13982,8 +13982,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .levelUpLearnset = sKoffingLevelUpLearnset,
         .teachableLearnset = sKoffingTeachableLearnset,
         .eggMoveLearnset = sKoffingEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_WEEZING},
-                                {EVO_NONE, 0, SPECIES_WEEZING_GALAR}),
+        .evolutions = EVOLUTION({EVO_NONE, 0, SPECIES_WEEZING},
+                                {EVO_LEVEL, 35, SPECIES_WEEZING_GALAR}),
     },
 
     [SPECIES_WEEZING] =
@@ -15555,8 +15555,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .levelUpLearnset = sMimeJrLevelUpLearnset,
         .teachableLearnset = sMimeJrTeachableLearnset,
         .eggMoveLearnset = sMimeJrEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_MR_MIME, CONDITIONS({IF_KNOWS_MOVE, MOVE_MIMIC})},
-                                {EVO_NONE, 0, SPECIES_MR_MIME_GALAR}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_MR_MIME_GALAR, CONDITIONS({IF_KNOWS_MOVE, MOVE_MIMIC})},
+                                {EVO_NONE, 0, SPECIES_MR_MIME}),
     },
 #endif //P_GEN_4_CROSS_EVOS
 

@@ -137,8 +137,8 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         )
         .levelUpLearnset = sDartrixLevelUpLearnset,
         .teachableLearnset = sDartrixTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_DECIDUEYE},
-                                {EVO_NONE, 0, SPECIES_DECIDUEYE_HISUI}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_DECIDUEYE_HISUI},
+                                {EVO_NONE, 0, SPECIES_DECIDUEYE}),
     },
 
     [SPECIES_DECIDUEYE] =
