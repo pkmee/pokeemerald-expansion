@@ -79,11 +79,11 @@ void ApplyMonSpeciesVariantToPaletteBuffer(u32 species, bool8 shiny, u32 PID, u1
   }
 
 static const struct SpeciesVariant gSpeciesVariants[NUM_SPECIES] = {
-    [SPECIES_TYRANITAR] = {
-      PAL1(11, 3),
-      HCL1(180, 10, 5, TRUE),
-      PAL2(1, 5),
-      HCL2(180, 5, 5, FALSE),
-    },
+    //[SPECIES_TYRANITAR] = {
+    //  PAL1(11, 3),
+    //  HCL1(180, 10, 5, TRUE),
+    //  PAL2(1, 5),
+    //  HCL2(180, 5, 5, FALSE),
+    //},
 
 };
