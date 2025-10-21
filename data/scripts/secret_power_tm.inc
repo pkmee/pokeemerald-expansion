@@ -7,6 +7,10 @@ Route111_Text_MakingRoomUseTMToMakeYourOwn:
 	.string "Will you use it to make your own room?$"
 
 Route111_Text_ExplainSecretPower:
+	.string "Haha! Gotcha! No secret powers here.\p"
+	.string "You can take this though!$"
+
+Route111_Text_ExplainSecretPowerOld:
 	.string "Find a big tree that looks like it might\n"
 	.string "drop some vines.\p"
 	.string "Use SECRET POWER in front of the tree.\n"
@@ -43,7 +47,7 @@ Route111_EventScript_SecretPowerMan::
 	end
 
 Route111_EventScript_GiveSecretPower::
-	giveitem ITEM_TM_SECRET_POWER
+	giveitem ITEM_TM_FLIP_TURN
 	goto_if_eq VAR_RESULT, FALSE, Route111_EventScript_NoRoomForSecretPower
 	msgbox Route111_Text_ExplainSecretPower, MSGBOX_DEFAULT
 	closemessage

@@ -67,7 +67,7 @@ FortreeCity_House4_EventScript_WingullReturned::
 # 34 "data/maps/FortreeCity_House4/scripts.pory"
 	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
 # 35 "data/maps/FortreeCity_House4/scripts.pory"
-	giveitem ITEM_MENTAL_HERB
+	giveitem ITEM_TM_DUAL_WINGBEAT
 # 36 "data/maps/FortreeCity_House4/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 # 37 "data/maps/FortreeCity_House4/scripts.pory"
@@ -167,7 +167,7 @@ FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
 # 84 "data/maps/FortreeCity_House4/scripts.pory"
 	.string "What is it holding?\p"
 # 85 "data/maps/FortreeCity_House4/scripts.pory"
-	.string "A MENTAL HERB?\n"
+	.string "A TM?\n"
 # 86 "data/maps/FortreeCity_House4/scripts.pory"
 	.string "It must have picked it up somewhere.\p"
 # 87 "data/maps/FortreeCity_House4/scripts.pory"

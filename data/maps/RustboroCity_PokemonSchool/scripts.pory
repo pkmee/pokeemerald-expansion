@@ -351,3 +351,20 @@ RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge:
 	.string "a TRAINER from a LEAGUE BADGE.$"
 
 `
+script RustboroCity_PokemonSchool_ProtectKid {
+	lockall
+	faceplayer
+    if (flag(FLAG_RECEIVED_TM_PROTECT)) {
+        msgbox(format("I've got it! PROTECT will help your POKéMON to be more defensive… I think?"))
+    } else {
+        msgbox(format("Our teacher said the best offense is a good defense! Or was it the best defense is a good offense?"))
+		msgbox(format("You can have this while I figure it out…"))
+		giveitem(ITEM_TM_PROTECT)
+		if (var(VAR_RESULT) == FALSE) {
+    		goto(Common_EventScript_ShowBagIsFull)
+		}
+		setflag(FLAG_RECEIVED_TM_PROTECT)
+    }
+    releaseall
+	end
+}

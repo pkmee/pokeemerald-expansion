@@ -32,7 +32,7 @@ FortreeCity_House4_EventScript_WingullReturned::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
-	giveitem ITEM_MENTAL_HERB
+	giveitem ITEM_TM_DUAL_WINGBEAT
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MENTAL_HERB
 	releaseall
@@ -82,7 +82,7 @@ FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
 	.string "Welcome back, BOMBIRDIER!\p"
 	.string "Huh? What is this?\n"
 	.string "What is it holding?\p"
-	.string "A MENTAL HERB?\n"
+	.string "A TM?\n"
 	.string "It must have picked it up somewhere.\p"
 	.string "But I'm not a TRAINER, so you can\n"
 	.string "have it.$"

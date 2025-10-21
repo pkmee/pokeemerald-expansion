@@ -700,3 +700,53 @@ RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge:
 	.string "It's hard to tell what you're like as\n"
 # 351 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
 	.string "a TRAINER from a LEAGUE BADGE.$"
+
+RustboroCity_PokemonSchool_ProtectKid::
+# 355 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	lockall
+# 356 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	faceplayer
+# 357 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	goto_if_set FLAG_RECEIVED_TM_PROTECT, RustboroCity_PokemonSchool_ProtectKid_2
+# 360 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	msgbox RustboroCity_PokemonSchool_ProtectKid_Text_1
+# 361 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	msgbox RustboroCity_PokemonSchool_ProtectKid_Text_2
+# 362 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	giveitem ITEM_TM_PROTECT
+# 363 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq RustboroCity_PokemonSchool_ProtectKid_6
+RustboroCity_PokemonSchool_ProtectKid_5:
+# 366 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	setflag FLAG_RECEIVED_TM_PROTECT
+RustboroCity_PokemonSchool_ProtectKid_1:
+# 368 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	releaseall
+	end
+
+RustboroCity_PokemonSchool_ProtectKid_2:
+# 358 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	msgbox RustboroCity_PokemonSchool_ProtectKid_Text_0
+	goto RustboroCity_PokemonSchool_ProtectKid_1
+
+RustboroCity_PokemonSchool_ProtectKid_6:
+# 364 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto RustboroCity_PokemonSchool_ProtectKid_5
+
+
+RustboroCity_PokemonSchool_ProtectKid_Text_0:
+# 358 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	.string "I've got it! PROTECT will help your\n"
+	.string "POKéMON to be more defensive… I think?$"
+
+RustboroCity_PokemonSchool_ProtectKid_Text_1:
+# 360 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	.string "Our teacher said the best offense is a\n"
+	.string "good defense! Or was it the best\l"
+	.string "defense is a good offense?$"
+
+RustboroCity_PokemonSchool_ProtectKid_Text_2:
+# 361 "data/maps/RustboroCity_PokemonSchool/scripts.pory"
+	.string "You can have this while I figure it out…$"

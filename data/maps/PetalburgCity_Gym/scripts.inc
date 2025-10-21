@@ -807,7 +807,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 # 404 "data/maps/PetalburgCity_Gym/scripts.pory"
 PetalburgCity_Gym_EventScript_GiveFacade::
 # 405 "data/maps/PetalburgCity_Gym/scripts.pory"
-	giveitem ITEM_TM_FACADE
+	giveitem ITEM_TM_HELPING_HAND
 # 406 "data/maps/PetalburgCity_Gym/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 # 407 "data/maps/PetalburgCity_Gym/scripts.pory"
@@ -2579,17 +2579,17 @@ PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis:
 # 1290 "data/maps/PetalburgCity_Gym/scripts.pory"
 PetalburgCity_Gym_Text_ExplainFacade:
 # 1291 "data/maps/PetalburgCity_Gym/scripts.pory"
-	.string "DAD: TM42 contains FACADE.\p"
+	.string "DAD: TM51 contains HELPING HAND.\p"
 # 1292 "data/maps/PetalburgCity_Gym/scripts.pory"
-	.string "It doubles the power of moves if\n"
+	.string "It allows one of your POKéMON to\n"
 # 1293 "data/maps/PetalburgCity_Gym/scripts.pory"
-	.string "the POKéMON is poisoned, paralyzed,\l"
+	.string "increase the power of your other\l"
 # 1294 "data/maps/PetalburgCity_Gym/scripts.pory"
-	.string "or burned.\p"
+	.string "POKéMON's attack this turn.\p"
 # 1295 "data/maps/PetalburgCity_Gym/scripts.pory"
-	.string "It might be able to turn a bad\n"
+	.string "It is the ultimate move for a\n"
 # 1296 "data/maps/PetalburgCity_Gym/scripts.pory"
-	.string "situation into an advantage.$"
+	.string "high-performing, trusting team!$"
 # 1297 "data/maps/PetalburgCity_Gym/scripts.pory"
 
 # 1298 "data/maps/PetalburgCity_Gym/scripts.pory"

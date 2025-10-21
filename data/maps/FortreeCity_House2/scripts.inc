@@ -43,7 +43,7 @@ FortreeCity_House2_EventScript_HiddenPowerGiver::
 # 22 "data/maps/FortreeCity_House2/scripts.pory"
 	msgbox FortreeCity_House2_Text_YourHiddenPowerHasAwoken, MSGBOX_DEFAULT
 # 23 "data/maps/FortreeCity_House2/scripts.pory"
-	giveitem ITEM_TM_HIDDEN_POWER
+	giveitem ITEM_TM_HYPER_VOICE
 # 24 "data/maps/FortreeCity_House2/scripts.pory"
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 # 25 "data/maps/FortreeCity_House2/scripts.pory"
@@ -160,3 +160,60 @@ FortreeCity_House2_Text_YouGuessedWrong:
 	.string "No, too bad.\n"
 # 81 "data/maps/FortreeCity_House2/scripts.pory"
 	.string "You guessed wrong.$"
+
+FortreeCity_HyperVoiceWoman::
+# 85 "data/maps/FortreeCity_House2/scripts.pory"
+	lockall
+# 86 "data/maps/FortreeCity_House2/scripts.pory"
+	faceplayer
+# 87 "data/maps/FortreeCity_House2/scripts.pory"
+	goto_if_set FLAG_RECEIVED_TM_HIDDEN_POWER, FortreeCity_HyperVoiceWoman_2
+# 90 "data/maps/FortreeCity_House2/scripts.pory"
+	msgbox FortreeCity_HyperVoiceWoman_Text_1
+# 91 "data/maps/FortreeCity_House2/scripts.pory"
+	msgbox FortreeCity_HyperVoiceWoman_Text_2
+# 92 "data/maps/FortreeCity_House2/scripts.pory"
+	giveitem ITEM_TM_HYPER_VOICE
+# 93 "data/maps/FortreeCity_House2/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq FortreeCity_HyperVoiceWoman_6
+FortreeCity_HyperVoiceWoman_5:
+# 96 "data/maps/FortreeCity_House2/scripts.pory"
+	setflag FLAG_RECEIVED_TM_HIDDEN_POWER
+# 97 "data/maps/FortreeCity_House2/scripts.pory"
+	msgbox FortreeCity_HyperVoiceWoman_Text_3
+FortreeCity_HyperVoiceWoman_1:
+# 99 "data/maps/FortreeCity_House2/scripts.pory"
+	releaseall
+	end
+
+FortreeCity_HyperVoiceWoman_2:
+# 88 "data/maps/FortreeCity_House2/scripts.pory"
+	msgbox FortreeCity_HyperVoiceWoman_Text_0
+	goto FortreeCity_HyperVoiceWoman_1
+
+FortreeCity_HyperVoiceWoman_6:
+# 94 "data/maps/FortreeCity_House2/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto FortreeCity_HyperVoiceWoman_5
+
+
+FortreeCity_HyperVoiceWoman_Text_0:
+# 88 "data/maps/FortreeCity_House2/scripts.pory"
+	.string "HYPER VOICE LETS LOOSE A HORRIBLY\n"
+	.string "LOUD CRY. IT'S A POWERFUL MOVE!$"
+
+FortreeCity_HyperVoiceWoman_Text_1:
+# 90 "data/maps/FortreeCity_House2/scripts.pory"
+	.string "Do you have a hidden power? This old\n"
+	.string "woman does…$"
+
+FortreeCity_HyperVoiceWoman_Text_2:
+# 91 "data/maps/FortreeCity_House2/scripts.pory"
+	.string "I CAN SHOUT INCREDIBLY LOUD WITH MY\n"
+	.string "HYPER VOICE!$"
+
+FortreeCity_HyperVoiceWoman_Text_3:
+# 97 "data/maps/FortreeCity_House2/scripts.pory"
+	.string "AND YOUR POKéMON CAN NOW USE THEIR\n"
+	.string "HYPER VOICES TOO!$"
