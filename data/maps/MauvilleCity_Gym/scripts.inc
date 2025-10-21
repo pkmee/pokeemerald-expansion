@@ -229,7 +229,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 # 115 "data/maps/MauvilleCity_Gym/scripts.pory"
 MauvilleCity_Gym_EventScript_GiveShockWave2::
 # 116 "data/maps/MauvilleCity_Gym/scripts.pory"
-	giveitem ITEM_TM_SHOCK_WAVE
+	giveitem ITEM_TM_CHARGE_BEAM
 # 117 "data/maps/MauvilleCity_Gym/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 # 118 "data/maps/MauvilleCity_Gym/scripts.pory"
@@ -245,7 +245,7 @@ MauvilleCity_Gym_EventScript_GiveShockWave2::
 # 123 "data/maps/MauvilleCity_Gym/scripts.pory"
 MauvilleCity_Gym_EventScript_GiveShockWave::
 # 124 "data/maps/MauvilleCity_Gym/scripts.pory"
-	giveitem ITEM_TM_SHOCK_WAVE
+	giveitem ITEM_TM_CHARGE_BEAM
 # 125 "data/maps/MauvilleCity_Gym/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 # 126 "data/maps/MauvilleCity_Gym/scripts.pory"
@@ -733,11 +733,11 @@ MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
 # 367 "data/maps/MauvilleCity_Gym/scripts.pory"
 MauvilleCity_Gym_Text_ExplainShockWave:
 # 368 "data/maps/MauvilleCity_Gym/scripts.pory"
-	.string "That TM34 there contains SHOCK WAVE.\p"
+	.string "That TM54 there contains CHARGE BEAM.\p"
 # 369 "data/maps/MauvilleCity_Gym/scripts.pory"
-	.string "It's a trustworthy move that never\n"
+	.string "It deals damage and has a chance of\n"
 # 370 "data/maps/MauvilleCity_Gym/scripts.pory"
-	.string "misses! You can count on it!\p"
+	.string "raising your POKéMON's SP ATK stat.\p"
 # 371 "data/maps/MauvilleCity_Gym/scripts.pory"
 	.string "… … … … … …$"
 # 372 "data/maps/MauvilleCity_Gym/scripts.pory"

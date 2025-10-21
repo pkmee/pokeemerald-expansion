@@ -237,7 +237,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 # 119 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
 SootopolisCity_Gym_1F_EventScript_GiveWaterPulse::
 # 120 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
-	giveitem ITEM_TM_WATER_PULSE
+	giveitem ITEM_TM_LIQUIDATION
 # 121 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 # 122 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
@@ -251,7 +251,7 @@ SootopolisCity_Gym_1F_EventScript_GiveWaterPulse::
 # 126 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
 SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2::
 # 127 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
-	giveitem ITEM_TM_WATER_PULSE
+	giveitem ITEM_TM_LIQUIDATION
 # 128 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 # 129 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
@@ -501,11 +501,11 @@ SootopolisCity_Gym_1F_Text_ExplainWaterPulse:
 # 251 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
 	.string "The TECHNICAL MACHINE I handed you\n"
 # 252 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
-	.string "contains WATER PULSE.\p"
+	.string "contains LIQUIDATION.\p"
 # 253 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
-	.string "In use, it will occasionally confuse\n"
+	.string "In use, your POKéMON will artfully\n"
 # 254 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
-	.string "the target with ultrasonic waves.\p"
+	.string "slam the target with a blast of water.\p"
 # 255 "data/maps/SootopolisCity_Gym_1F/scripts.pory"
 	.string "… … … … … …$"
 # 256 "data/maps/SootopolisCity_Gym_1F/scripts.pory"

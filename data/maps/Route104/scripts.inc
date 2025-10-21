@@ -659,7 +659,7 @@ Route104_EventScript_Boy2::
 # 330 "data/maps/Route104/scripts.pory"
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
 # 331 "data/maps/Route104/scripts.pory"
-	giveitem ITEM_TM_BULLET_SEED
+	giveitem ITEM_TM_TRAILBLAZE
 # 332 "data/maps/Route104/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 # 333 "data/maps/Route104/scripts.pory"

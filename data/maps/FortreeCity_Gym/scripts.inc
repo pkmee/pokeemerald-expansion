@@ -105,7 +105,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 # 53 "data/maps/FortreeCity_Gym/scripts.pory"
 FortreeCity_Gym_EventScript_GiveAerialAce2::
 # 54 "data/maps/FortreeCity_Gym/scripts.pory"
-	giveitem ITEM_TM_AERIAL_ACE
+	giveitem ITEM_TM_TAILWIND
 # 55 "data/maps/FortreeCity_Gym/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 # 56 "data/maps/FortreeCity_Gym/scripts.pory"
@@ -121,7 +121,7 @@ FortreeCity_Gym_EventScript_GiveAerialAce2::
 # 61 "data/maps/FortreeCity_Gym/scripts.pory"
 FortreeCity_Gym_EventScript_GiveAerialAce::
 # 62 "data/maps/FortreeCity_Gym/scripts.pory"
-	giveitem ITEM_TM_AERIAL_ACE
+	giveitem ITEM_TM_TAILWIND
 # 63 "data/maps/FortreeCity_Gym/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 # 64 "data/maps/FortreeCity_Gym/scripts.pory"
@@ -531,110 +531,112 @@ FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
 # 266 "data/maps/FortreeCity_Gym/scripts.pory"
 FortreeCity_Gym_Text_ExplainAerialAce:
 # 267 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "TM40 contains AERIAL ACE.\p"
+	.string "TM52 contains TAILWIND.\p"
 # 268 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "Its speed…\n"
+	.string "It increases the speed of your team\n"
 # 269 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "No POKéMON should be able to avoid it.\p"
+	.string "temporarily. It can seriously turn\n"
 # 270 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "… … … … … …$"
+	.string "the tide of a battle.\p"
 # 271 "data/maps/FortreeCity_Gym/scripts.pory"
-
+	.string "… … … … … …$"
 # 272 "data/maps/FortreeCity_Gym/scripts.pory"
-FortreeCity_Gym_Text_RegisteredWinona:
+
 # 273 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "Registered GYM LEADER WINONA\n"
+FortreeCity_Gym_Text_RegisteredWinona:
 # 274 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "in the POKéNAV.$"
+	.string "Registered GYM LEADER WINONA\n"
 # 275 "data/maps/FortreeCity_Gym/scripts.pory"
-
+	.string "in the POKéNAV.$"
 # 276 "data/maps/FortreeCity_Gym/scripts.pory"
-FortreeCity_Gym_Text_WinonaPostBattle:
+
 # 277 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "Though I fell to you, I will remain\n"
+FortreeCity_Gym_Text_WinonaPostBattle:
 # 278 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "devoted to BIRD POKéMON.$"
+	.string "Though I fell to you, I will remain\n"
 # 279 "data/maps/FortreeCity_Gym/scripts.pory"
-
+	.string "devoted to BIRD POKéMON.$"
 # 280 "data/maps/FortreeCity_Gym/scripts.pory"
-FortreeCity_Gym_Text_GymStatue:
+
 # 281 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "FORTREE CITY POKéMON GYM$"
+FortreeCity_Gym_Text_GymStatue:
 # 282 "data/maps/FortreeCity_Gym/scripts.pory"
-
+	.string "FORTREE CITY POKéMON GYM$"
 # 283 "data/maps/FortreeCity_Gym/scripts.pory"
-FortreeCity_Gym_Text_GymStatueCertified:
+
 # 284 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "FORTREE CITY POKéMON GYM\p"
+FortreeCity_Gym_Text_GymStatueCertified:
 # 285 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "WINONA'S CERTIFIED TRAINERS:\n"
+	.string "FORTREE CITY POKéMON GYM\p"
 # 286 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "{PLAYER}$"
+	.string "WINONA'S CERTIFIED TRAINERS:\n"
 # 287 "data/maps/FortreeCity_Gym/scripts.pory"
-
+	.string "{PLAYER}$"
 # 288 "data/maps/FortreeCity_Gym/scripts.pory"
-FortreeCity_Gym_Text_WinonaPreRematch:
+
 # 289 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "WINONA: We humans can never escape\n"
+FortreeCity_Gym_Text_WinonaPreRematch:
 # 290 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "gravity's pull on the ground.\p"
-# 291 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "But by striving for excellence,\n"
-# 292 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "we have the power to soar!\p"
-# 293 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "You have scaled the pinnacle as\n"
-# 294 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "the reigning CHAMPION.\p"
-# 295 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "Please, allow me to see your power\n"
-# 296 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "at full flight!$"
-# 297 "data/maps/FortreeCity_Gym/scripts.pory"
-
-# 298 "data/maps/FortreeCity_Gym/scripts.pory"
-FortreeCity_Gym_Text_WinonaRematchDefeat:
-# 299 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "I failed to reach your height again…$"
-# 300 "data/maps/FortreeCity_Gym/scripts.pory"
-
-# 301 "data/maps/FortreeCity_Gym/scripts.pory"
-FortreeCity_Gym_Text_WinonaPostRematch:
-# 302 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "WINONA: Even though I have lost,\n"
-# 303 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "the wings of my heart remain unbroken.\p"
-# 304 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "I can rise and soar again and\n"
-# 305 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "yet again.\p"
-# 306 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "I am convinced of it!$"
-# 307 "data/maps/FortreeCity_Gym/scripts.pory"
-
-# 308 "data/maps/FortreeCity_Gym/scripts.pory"
-FortreeCity_Gym_Text_WinonaRematchNeedTwoMons:
-# 309 "data/maps/FortreeCity_Gym/scripts.pory"
 	.string "WINONA: We humans can never escape\n"
-# 310 "data/maps/FortreeCity_Gym/scripts.pory"
+# 291 "data/maps/FortreeCity_Gym/scripts.pory"
 	.string "gravity's pull on the ground.\p"
-# 311 "data/maps/FortreeCity_Gym/scripts.pory"
+# 292 "data/maps/FortreeCity_Gym/scripts.pory"
 	.string "But by striving for excellence,\n"
-# 312 "data/maps/FortreeCity_Gym/scripts.pory"
+# 293 "data/maps/FortreeCity_Gym/scripts.pory"
 	.string "we have the power to soar!\p"
-# 313 "data/maps/FortreeCity_Gym/scripts.pory"
+# 294 "data/maps/FortreeCity_Gym/scripts.pory"
 	.string "You have scaled the pinnacle as\n"
-# 314 "data/maps/FortreeCity_Gym/scripts.pory"
+# 295 "data/maps/FortreeCity_Gym/scripts.pory"
 	.string "the reigning CHAMPION.\p"
-# 315 "data/maps/FortreeCity_Gym/scripts.pory"
+# 296 "data/maps/FortreeCity_Gym/scripts.pory"
 	.string "Please, allow me to see your power\n"
+# 297 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "at full flight!$"
+# 298 "data/maps/FortreeCity_Gym/scripts.pory"
+
+# 299 "data/maps/FortreeCity_Gym/scripts.pory"
+FortreeCity_Gym_Text_WinonaRematchDefeat:
+# 300 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "I failed to reach your height again…$"
+# 301 "data/maps/FortreeCity_Gym/scripts.pory"
+
+# 302 "data/maps/FortreeCity_Gym/scripts.pory"
+FortreeCity_Gym_Text_WinonaPostRematch:
+# 303 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "WINONA: Even though I have lost,\n"
+# 304 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "the wings of my heart remain unbroken.\p"
+# 305 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "I can rise and soar again and\n"
+# 306 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "yet again.\p"
+# 307 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "I am convinced of it!$"
+# 308 "data/maps/FortreeCity_Gym/scripts.pory"
+
+# 309 "data/maps/FortreeCity_Gym/scripts.pory"
+FortreeCity_Gym_Text_WinonaRematchNeedTwoMons:
+# 310 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "WINONA: We humans can never escape\n"
+# 311 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "gravity's pull on the ground.\p"
+# 312 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "But by striving for excellence,\n"
+# 313 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "we have the power to soar!\p"
+# 314 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "You have scaled the pinnacle as\n"
+# 315 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "the reigning CHAMPION.\p"
 # 316 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "at full flight!\p"
+	.string "Please, allow me to see your power\n"
 # 317 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "Oh, no… Do you have but one\n"
+	.string "at full flight!\p"
 # 318 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "POKéMON with you?\p"
+	.string "Oh, no… Do you have but one\n"
 # 319 "data/maps/FortreeCity_Gym/scripts.pory"
-	.string "Please return with two POKéMON\n"
+	.string "POKéMON with you?\p"
 # 320 "data/maps/FortreeCity_Gym/scripts.pory"
+	.string "Please return with two POKéMON\n"
+# 321 "data/maps/FortreeCity_Gym/scripts.pory"
 	.string "at the very least.$"

@@ -111,7 +111,7 @@ PacifidlogTown_House2_EventScript_GiveFrustration::
 # 56 "data/maps/PacifidlogTown_House2/scripts.pory"
 	msgbox PacifidlogTown_House2_Text_ViciousPokemonTakeThis, MSGBOX_DEFAULT
 # 57 "data/maps/PacifidlogTown_House2/scripts.pory"
-	giveitem ITEM_TM_FRUSTRATION
+	giveitem ITEM_TM_THROAT_CHOP
 # 58 "data/maps/PacifidlogTown_House2/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 # 59 "data/maps/PacifidlogTown_House2/scripts.pory"
@@ -292,3 +292,56 @@ PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch:
 	.string "It doesn't appear to like the TRAINER\n"
 # 147 "data/maps/PacifidlogTown_House2/scripts.pory"
 	.string "very much.$"
+
+PacifidlogTown_TMMan::
+# 151 "data/maps/PacifidlogTown_House2/scripts.pory"
+	lock
+# 152 "data/maps/PacifidlogTown_House2/scripts.pory"
+	goto_if_set FLAG_LANDMARK_PACIFIDLOG_SHOP, PacifidlogTown_TMMan_2
+PacifidlogTown_TMMan_1:
+# 156 "data/maps/PacifidlogTown_House2/scripts.pory"
+	msgbox PacifidlogTown_TMMan_Text_1
+# 157 "data/maps/PacifidlogTown_House2/scripts.pory"
+	waitmessage
+# 158 "data/maps/PacifidlogTown_House2/scripts.pory"
+	pokemart PacifidlogTown_TMShop
+# 159 "data/maps/PacifidlogTown_House2/scripts.pory"
+	msgbox PacifidlogTown_TMMan_Text_2
+# 160 "data/maps/PacifidlogTown_House2/scripts.pory"
+	release
+	return
+
+PacifidlogTown_TMMan_2:
+# 153 "data/maps/PacifidlogTown_House2/scripts.pory"
+	msgbox PacifidlogTown_TMMan_Text_0
+# 154 "data/maps/PacifidlogTown_House2/scripts.pory"
+	setflag FLAG_LANDMARK_PACIFIDLOG_SHOP
+	goto PacifidlogTown_TMMan_1
+
+
+	.align 2
+# 163 "data/maps/PacifidlogTown_House2/scripts.pory"
+PacifidlogTown_TMShop:
+# 164 "data/maps/PacifidlogTown_House2/scripts.pory"
+	.2byte ITEM_TM_FIRE_BLAST
+# 165 "data/maps/PacifidlogTown_House2/scripts.pory"
+	.2byte ITEM_TM_THUNDER
+# 166 "data/maps/PacifidlogTown_House2/scripts.pory"
+	.2byte ITEM_TM_BLIZZARD
+	.2byte ITEM_NONE
+
+PacifidlogTown_TMMan_Text_0:
+# 153 "data/maps/PacifidlogTown_House2/scripts.pory"
+	.string "I was once a powerful trainer, traveling\n"
+	.string "the region to complete the gym\l"
+	.string "challenge.\p"
+	.string "However, now I'm just a retired old man\n"
+	.string "who lives on the sea.$"
+
+PacifidlogTown_TMMan_Text_1:
+# 156 "data/maps/PacifidlogTown_House2/scripts.pory"
+	.string "Would you like to buy any TMs?$"
+
+PacifidlogTown_TMMan_Text_2:
+# 159 "data/maps/PacifidlogTown_House2/scripts.pory"
+	.string "Farewell.$"

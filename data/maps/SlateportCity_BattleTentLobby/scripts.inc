@@ -403,7 +403,7 @@ SlateportCity_BattleTentLobby_EventScript_TormentGiver::
 # 202 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	msgbox SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe, MSGBOX_DEFAULT
 # 203 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
-	giveitem ITEM_TM_TORMENT
+	giveitem ITEM_TM_BULLDOZE
 # 204 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 # 205 "data/maps/SlateportCity_BattleTentLobby/scripts.pory"

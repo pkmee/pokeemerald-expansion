@@ -824,3 +824,21 @@ Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere:
 	.string "…On closer inspection, this is written\n"
 	.string "on it: “Write the secret code here.”$"
 `
+script Route110_TrickHouseMan {
+	lockall
+	faceplayer
+    if (flag(FLAG_RECEIVED_TM_TRICK_ROOM)) {
+        msgbox(format("My TRICK HOUSE is coming along! It's on the cusp of greatness. But my TRICK HOUSE depends on TRICK ROOMs! I hope you are making many TRICK ROOMs!"))
+    } else {
+        msgbox(format("A TRICK HOUSE! That's what this establishment will be! The finest and trickiest in all of Hoenn, you won't find anything more deceptive or unseeming."))
+		msgbox(format("And what of this room? Or the next? Or any other?!"))
+		msgbox(format("Hmm… This is perplexing. I'm simply at a loss. Perhaps you can make a TRICK ROOM better than I?"))
+		giveitem(ITEM_TM_TRICK_ROOM)
+		if (var(VAR_RESULT) == FALSE) {
+    		goto(Common_EventScript_ShowBagIsFull)
+		}
+		setflag(FLAG_RECEIVED_TM_TRICK_ROOM)
+    }
+    releaseall
+	end
+}

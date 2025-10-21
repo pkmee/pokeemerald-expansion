@@ -1648,3 +1648,65 @@ Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere:
 	.string "…On closer inspection, this is written\n"
 # 825 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
 	.string "on it: “Write the secret code here.”$"
+
+Route110_TrickHouseMan::
+# 828 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	lockall
+# 829 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	faceplayer
+# 830 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	goto_if_set FLAG_RECEIVED_TM_TRICK_ROOM, Route110_TrickHouseMan_2
+# 833 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	msgbox Route110_TrickHouseMan_Text_1
+# 834 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	msgbox Route110_TrickHouseMan_Text_2
+# 835 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	msgbox Route110_TrickHouseMan_Text_3
+# 836 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	giveitem ITEM_TM_TRICK_ROOM
+# 837 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq Route110_TrickHouseMan_6
+Route110_TrickHouseMan_5:
+# 840 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	setflag FLAG_RECEIVED_TM_TRICK_ROOM
+Route110_TrickHouseMan_1:
+# 842 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	releaseall
+	end
+
+Route110_TrickHouseMan_2:
+# 831 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	msgbox Route110_TrickHouseMan_Text_0
+	goto Route110_TrickHouseMan_1
+
+Route110_TrickHouseMan_6:
+# 838 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	goto Common_EventScript_ShowBagIsFull
+	goto Route110_TrickHouseMan_5
+
+
+Route110_TrickHouseMan_Text_0:
+# 831 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	.string "My TRICK HOUSE is coming along! It's on\n"
+	.string "the cusp of greatness. But my TRICK\l"
+	.string "HOUSE depends on TRICK ROOMs! I hope\l"
+	.string "you are making many TRICK ROOMs!$"
+
+Route110_TrickHouseMan_Text_1:
+# 833 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	.string "A TRICK HOUSE! That's what this\n"
+	.string "establishment will be! The finest and\l"
+	.string "trickiest in all of Hoenn, you won't find\l"
+	.string "anything more deceptive or unseeming.$"
+
+Route110_TrickHouseMan_Text_2:
+# 834 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	.string "And what of this room? Or the next? Or\n"
+	.string "any other?!$"
+
+Route110_TrickHouseMan_Text_3:
+# 835 "data/maps/Route110_TrickHouseEntrance/scripts.pory"
+	.string "Hmm… This is perplexing. I'm simply at a\n"
+	.string "loss. Perhaps you can make a TRICK ROOM\l"
+	.string "better than I?$"

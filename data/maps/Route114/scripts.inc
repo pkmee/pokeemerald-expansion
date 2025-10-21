@@ -95,7 +95,7 @@ Route114_EventScript_RoarGentleman::
 # 48 "data/maps/Route114/scripts.pory"
 	msgbox Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT
 # 49 "data/maps/Route114/scripts.pory"
-	giveitem ITEM_TM_ROAR
+	giveitem ITEM_TM_SNARL
 # 50 "data/maps/Route114/scripts.pory"
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 # 51 "data/maps/Route114/scripts.pory"
@@ -359,7 +359,7 @@ Route114_EventScript_Kai::
 # 180 "data/maps/Route114/scripts.pory"
 Route114_Text_AllMyMonDoesIsRoarTakeThis:
 # 181 "data/maps/Route114/scripts.pory"
-	.string "All my POKéMON does is ROAR…\n"
+	.string "All my POKéMON does is SNARL…\n"
 # 182 "data/maps/Route114/scripts.pory"
 	.string "No one dares to come near me…\p"
 # 183 "data/maps/Route114/scripts.pory"
@@ -371,9 +371,9 @@ Route114_Text_AllMyMonDoesIsRoarTakeThis:
 # 186 "data/maps/Route114/scripts.pory"
 Route114_Text_ExplainRoar:
 # 187 "data/maps/Route114/scripts.pory"
-	.string "TM05 contains ROAR.\n"
+	.string "TM05 contains SNARL.\n"
 # 188 "data/maps/Route114/scripts.pory"
-	.string "A ROAR sends POKéMON scurrying.$"
+	.string "A SNARL frightens POKéMON.$"
 # 189 "data/maps/Route114/scripts.pory"
 
 # 190 "data/maps/Route114/scripts.pory"

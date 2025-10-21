@@ -54,7 +54,7 @@ PacifidlogTown_House2_EventScript_PutInEffort::
 
 PacifidlogTown_House2_EventScript_GiveFrustration::
 	msgbox PacifidlogTown_House2_Text_ViciousPokemonTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM_FRUSTRATION
+	giveitem ITEM_TM_THROAT_CHOP
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
 	special SetPacifidlogTMReceivedDay
@@ -147,3 +147,21 @@ PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch:
 	.string "very much.$"
 
 `
+script PacifidlogTown_TMMan {
+	lock
+	if (flag(FLAG_LANDMARK_PACIFIDLOG_SHOP)) {
+		msgbox(format("I was once a powerful trainer, traveling the region to complete the gym challenge.\pHowever, now I'm just a retired old man who lives on the sea."))
+		setflag(FLAG_LANDMARK_PACIFIDLOG_SHOP)
+	}
+	msgbox(format("Would you like to buy any TMs?"))
+	waitmessage
+	pokemart(PacifidlogTown_TMShop)
+	msgbox("Farewell.")
+	release
+}
+
+mart PacifidlogTown_TMShop {
+	ITEM_TM_FIRE_BLAST
+	ITEM_TM_THUNDER
+	ITEM_TM_BLIZZARD
+}
