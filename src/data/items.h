@@ -14515,7 +14515,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_PAGER] =
     {
-        .name = _("Pager"),
+        .name = ITEM_NAME("Pager"),
         .price = 0,
         .description = COMPOUND_STRING(
             "A device that can\n"
