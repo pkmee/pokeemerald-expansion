@@ -14513,6 +14513,22 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
 
+    [ITEM_PAGER] =
+    {
+        .name = _("Pager"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A device that can\n"
+            "summon a Pokémon\n"
+            "to fly with."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_FlyTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
     [ITEM_SURF_TOOL] =
     {
         .name = ITEM_NAME("Surf"),
