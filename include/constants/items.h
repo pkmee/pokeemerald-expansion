@@ -994,10 +994,19 @@
 
 #define ITEM_STRANGE_BALL 828
 
+#define ITEM_BIG_AXE 829 // qol_field_moves
+#define ITEM_PAGER 830 // qol_field_moves
+#define ITEM_SURF_TOOL 831 // qol_field_moves
+#define ITEM_STRENGTH_TOOL 832 // qol_field_moves
+#define ITEM_LANTERN 833 // qol_field_moves
+#define ITEM_PICKAXE 834 // qol_field_moves
+#define ITEM_WATERFALL_TOOL 835 // qol_field_moves
+#define ITEM_SCUBA_GEAR 836 // qol_field_moves end
+
 // HOPO BERRY
 // LEGEND PLATE
 
-#define ITEMS_COUNT 829
+#define ITEMS_COUNT 837
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

@@ -2,7 +2,8 @@
 EventScript_CutTree::
 	lockall
 	checkfieldmove FIELD_MOVE_CUT, TRUE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CanUseCutOtherwise
+EventScript_DoCut::
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_CUT
@@ -16,6 +17,7 @@ EventScript_CutTreeCommon:
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
 EventScript_CutTreeDown:: @ fallthrough
+	setflag FLAG_SYS_USE_CUT
 	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	call_if_eq VAR_0x8004, TRUE, EventScript_FollowerFieldMove
 	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
@@ -23,6 +25,13 @@ EventScript_CutTreeDown:: @ fallthrough
 	removeobject VAR_LAST_TALKED
 	releaseall
 	end
+
+EventScript_CanUseCutOtherwise::
+	checkpartylearnknowsfieldmove MOVE_CUT
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_DoCut
+	checkitem ITEM_BIG_AXE, 1
+	goto_if_ne VAR_RESULT, TRUE, EventScript_CheckTreeCantCut
+	goto EventScript_UseCutTool
 
 @ Use cut from party menu
 EventScript_UseCut::
@@ -64,7 +73,8 @@ EventScript_UseRockSmash::
 EventScript_RockSmash::
 	lockall
 	checkfieldmove FIELD_MOVE_ROCK_SMASH, TRUE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CanUseRockSmashOtherwise
+EventScript_DoRockSmash::
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
@@ -79,6 +89,7 @@ EventScript_RockSmashCommon:
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
 EventScript_SmashRock:: @ fallthrough
+	setflag FLAG_SYS_USE_ROCK_SMASH
 	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	call_if_eq VAR_0x8004, TRUE, EventScript_FollowerFieldMove
 	applymovement VAR_LAST_TALKED, Movement_SmashRock
@@ -91,6 +102,13 @@ EventScript_SmashRock:: @ fallthrough
 	waitstate
 	releaseall
 	end
+
+EventScript_CanUseRockSmashOtherwise::
+	checkpartylearnknowsfieldmove MOVE_ROCK_SMASH
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_DoRockSmash
+	checkitem ITEM_PICKAXE, 1
+	goto_if_ne VAR_RESULT, TRUE, EventScript_CantSmashRock
+	goto EventScript_UseRockSmashTool
 
 EventScript_FollowerFieldMove:
 	getdirectiontoface VAR_0x8005, OBJ_EVENT_ID_FOLLOWER, OBJ_EVENT_ID_PLAYER
@@ -226,14 +244,23 @@ EventScript_StrengthBoulder::
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	checkfieldmove FIELD_MOVE_STRENGTH, TRUE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
+EventScript_DoStrength::
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength
 	closemessage
 	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
+	call_if_set FLAG_SYS_USE_STRENGTH, EventScript_PushBoulderScript
 	goto EventScript_ActivateStrength
 	end
+
+EventScript_CanUseStrengthOtherwise::
+	checkpartylearnknowsfieldmove MOVE_STRENGTH
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_DoStrength
+	checkitem ITEM_STRENGTH_TOOL, 1
+	goto_if_ne VAR_RESULT, TRUE, EventScript_CantStrength
+	goto EventScript_UseStrengthTool
 
 EventScript_UseStrength::
 	lockall
@@ -254,6 +281,7 @@ EventScript_CantStrength::
 	end
 
 EventScript_CheckActivatedBoulder::
+	buffermovename STR_VAR_2, MOVE_STRENGTH
 	msgbox Text_StrengthActivated, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -278,22 +306,32 @@ Text_CantStrength:
 	.string "may be able to push it aside.$"
 
 Text_StrengthActivated:
-	.string "STRENGTH made it possible to move\n"
+	.string "{STR_VAR_2} made it possible to move\n"
 	.string "boulders around.$"
 
 EventScript_UseWaterfall::
 	lockall
 	checkfieldmove FIELD_MOVE_WATERFALL
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
+EventScript_DoWaterfall::
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
 	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
+EventScript_UseWaterfallMon::
+	setflag FLAG_SYS_USE_WATERFALL
 	hidefollowernpc
 	dofieldeffect FLDEFF_USE_WATERFALL
 	callnative FollowerNPC_WarpSetEnd
 	goto EventScript_EndWaterfall
+
+EventScript_CanUseWaterfallOtherwise::
+	checkpartylearnknowsfieldmove MOVE_WATERFALL
+	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_DoWaterfall
+	checkitem ITEM_WATERFALL_TOOL, 1
+	goto_if_ne VAR_RESULT, TRUE, EventScript_CantWaterfall
+	goto EventScript_UseWaterfallTool
 
 EventScript_CannotUseWaterfall::
 	lockall

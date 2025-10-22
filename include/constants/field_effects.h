@@ -79,6 +79,10 @@
 #define FLDEFF_DEFOG                     74
 #define FLDEFF_USE_ROCK_CLIMB            75
 #define FLDEFF_ROCK_CLIMB_DUST           76
+#define FLDEFF_USE_SURF_TOOL             77
+#define FLDEFF_USE_WATERFALL_TOOL        78
+#define FLDEFF_USE_DIVE_TOOL             79
+#define FLDEFF_USE_ROCK_CLIMB_TOOL       80
 
 #define FLDEFFOBJ_SHADOW_S              0
 #define FLDEFFOBJ_SHADOW_M              1

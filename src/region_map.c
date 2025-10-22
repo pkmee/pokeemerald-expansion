@@ -27,6 +27,7 @@
 #include "constants/heal_locations.h"
 #include "constants/rgb.h"
 #include "constants/weather.h"
+#include "qol_field_moves.h"
 
 /*
  *  This file handles region maps generally, and the map used when selecting a fly destination.
@@ -2004,6 +2005,17 @@ static void CB_ExitFlyMap(void)
 
                 SetFlyDestination(tempRegionMap);
                 ReturnToFieldFromFlyMapSelect();
+
+                // Start qol_field_moves
+                if (IsFlyToolUsed())
+                    ReturnToFieldFromFlyToolMapSelect();
+                else
+                    ReturnToFieldFromFlyMapSelect();
+            }
+            else if (IsFlyToolUsed())
+            {
+                ReturnToFieldOrBagFromFlyTool();
+                // End qol_field_moves
             }
             else
             {

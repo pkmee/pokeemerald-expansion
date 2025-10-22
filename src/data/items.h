@@ -14496,6 +14496,118 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+
+    [ITEM_BIG_AXE] =
+    {
+        .name = ITEM_NAME("Big Axe"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A big axe that\n"
+            "can cut down\n"
+            "small trees."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_CutTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_SURF_TOOL] =
+    {
+        .name = ITEM_NAME("Surf"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A big axe that\n"
+            "can cut down\n"
+            "small trees."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_SurfTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_STRENGTH_TOOL] =
+    {
+        .name = ITEM_NAME("Strength"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A big axe that\n"
+            "can cut down\n"
+            "small trees."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_StrengthTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_LANTERN] =
+    {
+        .name = ITEM_NAME("Lantern"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A big axe that\n"
+            "can cut down\n"
+            "small trees."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_FlashTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_PICKAXE] =
+    {
+        .name = ITEM_NAME("Pickaxe"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A pickaxe that\n"
+            "can smash away\n"
+            "weak rocks."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_RockSmashTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_WATERFALL_TOOL] =
+    {
+        .name = ITEM_NAME("Waterfall"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A big axe that\n"
+            "can cut down\n"
+            "small trees."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_WaterfallTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_SCUBA_GEAR] =
+    {
+        .name = ITEM_NAME("Scuba Gear"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A big axe that\n"
+            "can cut down\n"
+            "small trees."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_DiveTool,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
 };
 
 #undef ITEM_NAME

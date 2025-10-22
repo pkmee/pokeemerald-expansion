@@ -39,6 +39,7 @@
 #include "party_menu.h"
 #include "pokedex.h"
 #include "pokemon_storage_system.h"
+#include "qol_field_moves.h" // qol_field_moves
 #include "random.h"
 #include "overworld.h"
 #include "rotating_tile_puzzle.h"
@@ -3044,6 +3045,17 @@ bool8 ScrCmd_warpwhitefade(struct ScriptContext *ctx)
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
+
+// Start qol_field_moves - see script_cmd_table.inc and event.inc
+bool8 ScrCmd_checkpartylearnknowsfieldmove(struct ScriptContext *ctx)
+{
+    u16 move = ScriptReadHalfword(ctx);
+
+    PartyHasMonLearnsKnowsFieldMove(move);
+
+    return FALSE;
+}
+// End qol_field_moves
 
 void ScriptSetDoubleBattleFlag(struct ScriptContext *ctx)
 {
