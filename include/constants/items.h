@@ -996,8 +996,8 @@
 
 #define ITEM_BIG_AXE 829 // qol_field_moves
 #define ITEM_PAGER 830 // qol_field_moves
-#define ITEM_SURF_TOOL 831 // qol_field_moves
-#define ITEM_STRENGTH_TOOL 832 // qol_field_moves
+#define ITEM_SURFBOARD 831 // qol_field_moves
+#define ITEM_POWER_GLOVE 832 // qol_field_moves
 #define ITEM_LANTERN 833 // qol_field_moves
 #define ITEM_PICKAXE 834 // qol_field_moves
 #define ITEM_WATERFALL_TOOL 835 // qol_field_moves

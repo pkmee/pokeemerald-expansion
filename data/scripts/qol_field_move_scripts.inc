@@ -19,7 +19,7 @@ EventScript_UseStrengthTool::
 	lockall
 	call_if_set FLAG_SYS_USE_STRENGTH, EventScript_PushBoulderScript @ qol_field_moves
 	setflag FLAG_SYS_USE_STRENGTH
-	bufferitemname STR_VAR_2, ITEM_STRENGTH_TOOL
+	bufferitemname STR_VAR_2, ITEM_POWER_GLOVE
 	msgbox Text_PlayerUsedFieldTool, MSGBOX_DEFAULT
 	msgbox Text_StrengthActivated, MSGBOX_DEFAULT
 	releaseall
@@ -64,7 +64,7 @@ EventScript_UseFlashTool::
 	end
 
 EventScript_UseSurfTool::
-	bufferitemname STR_VAR_2, ITEM_SURF_TOOL
+	bufferitemname STR_VAR_2, ITEM_SURFBOARD
 	msgbox Text_PlayerUsedFieldTool, MSGBOX_DEFAULT
 EventScript_UseSurfFieldEffect::
 	dofieldeffect FLDEFF_USE_SURF_TOOL

@@ -258,7 +258,7 @@ EventScript_DoStrength::
 EventScript_CanUseStrengthOtherwise::
 	checkpartylearnknowsfieldmove MOVE_STRENGTH
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_DoStrength
-	checkitem ITEM_STRENGTH_TOOL, 1
+	checkitem ITEM_POWER_GLOVE, 1
 	goto_if_ne VAR_RESULT, TRUE, EventScript_CantStrength
 	goto EventScript_UseStrengthTool
 

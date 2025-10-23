@@ -18,6 +18,6 @@ EventScript_EndUseSurf::
 EventScript_CanUseSurfOtherwise::
 	checkpartylearnknowsfieldmove MOVE_SURF
 	goto_if_ne VAR_RESULT, PARTY_SIZE, EventScript_DoSurf
-	checkitem ITEM_SURF_TOOL, 1
+	checkitem ITEM_SURFBOARD, 1
 	goto_if_ne VAR_RESULT, TRUE, EventScript_EndUseSurf
 	goto EventScript_UseSurfTool

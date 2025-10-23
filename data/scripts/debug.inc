@@ -137,6 +137,25 @@ Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
+	giveitem ITEM_OLD_ROD
+	giveitem ITEM_GOOD_ROD
+	giveitem ITEM_SUPER_ROD
+	giveitem ITEM_DOWSING_MACHINE
+	giveitem ITEM_VS_SEEKER
+	giveitem ITEM_POKEMON_BOX_LINK
+	giveitem ITEM_COIN_CASE
+	giveitem ITEM_POWDER_JAR
+	giveitem ITEM_WAILMER_PAIL
+	giveitem ITEM_POKEBLOCK_CASE
+	giveitem ITEM_SOOT_SACK
+	giveitem ITEM_POKE_FLUTE
+	giveitem ITEM_BIG_AXE
+	giveitem ITEM_SURFBOARD
+	giveitem ITEM_PAGER
+	giveitem ITEM_POWER_GLOVE
+	giveitem ITEM_LANTERN
+	giveitem ITEM_PICKAXE
+	giveitem ITEM_SCUBA_GEAR
 	release
 	end
 
