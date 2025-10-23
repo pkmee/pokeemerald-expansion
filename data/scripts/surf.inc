@@ -1,6 +1,6 @@
 EventScript_UseSurf::
 	checkfieldmove FIELD_MOVE_SURF
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_EndUseSurf
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CanUseSurfOtherwise
 EventScript_DoSurf::
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT

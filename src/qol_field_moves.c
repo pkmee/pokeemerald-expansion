@@ -612,7 +612,7 @@ void ClearFieldMoveFlags(void)
     FlagClear(FLAG_SYS_USE_WATERFALL);
 }
 
-static bool32 CanLearnMoveLevelUp(u16 species, u16 move)
+static bool32 CanSpeciesLearnMoveLevelUp(u16 species, u16 move);
 {
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
     u32 i = 0;
