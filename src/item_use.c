@@ -83,7 +83,6 @@ static void CB2_OpenPokeblockFromBag(void);
 static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 static void ItemUseOnFieldCB_CutItem(u8 taskId);
-static void ItemUseOnFieldCB_Fly(u8 taskId);
 
 static const u8 sText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
@@ -1650,12 +1649,6 @@ void ItemUseOutOfBattle_Fly(u8 taskId)
         // If any of the checks fail, show the "can't use" message.
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
     }
-}
-
-static void ItemUseOnFieldCB_Fly(u8 taskId)
-{
-    SetMainCallback2(CB2_OpenFlyMap);
-    DestroyTask(taskId);
 }
 
 void CB2_OpenFlyItemFromBag(void)

@@ -9,6 +9,8 @@
 #include "constants/party_menu.h"
 #include "item.h"
 
+static u8 sFieldMoveSource = FIELD_MOVE_SOURCE_POKEMON;
+
 static bool32 IsFieldMoveUnlocked_Cut(void)
 {
     return FlagGet(FLAG_BADGE01_GET);
@@ -226,6 +228,16 @@ const struct FieldMoveInfo gFieldMoveInfo[FIELD_MOVES_COUNT] =
 #endif
 };
 
+u8 GetFieldMoveSource(void)
+{
+    return sFieldMoveSource;
+}
+
+void SetFieldMoveSource(u8 source)
+{
+    sFieldMoveSource = source;
+}
+
 bool8 CanUseFly(void)
 {
     u32 i;
@@ -241,13 +253,19 @@ bool8 CanUseFly(void)
         {
             u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
             if (CanLearnTeachableMove(species, MOVE_FLY))
+            {
+                sFieldMoveSource = FIELD_MOVE_SOURCE_POKEMON;
                 return TRUE; // Found a valid Pokémon
+            }
         }
     }
 
     // If no Pokémon is found, check for the Fly Tool item.
     if (CheckBagHasItem(ITEM_TEMP_FLY, 1))
-        return TRUE; // Found the item
+        {
+            sFieldMoveSource = FIELD_MOVE_SOURCE_ITEM;
+            return TRUE; // Found the item
+        }
 
     // If all checks fail, return FALSE.
     return FALSE;

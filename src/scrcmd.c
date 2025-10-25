@@ -2321,6 +2321,7 @@ bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
                 if (IsFieldMoveUnlocked(fieldMove))
                 {
                     gSpecialVar_Result = i; // Return party slot
+                    SetFieldMoveSource(FIELD_MOVE_SOURCE_POKEMON);
                     return FALSE; // Continue script execution
                 }
                 // Found a Pokémon but don't have the badge, so fail completely.
@@ -2337,6 +2338,7 @@ bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
         if (IsFieldMoveUnlocked(fieldMove))
         {
             gSpecialVar_Result = PARTY_SIZE + 1; // Return special value for item
+            SetFieldMoveSource(FIELD_MOVE_SOURCE_ITEM);
             return FALSE;
         }
     }
