@@ -14496,6 +14496,24 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+        
+    [ITEM_TEMP_CUT] =
+    {
+        .name = ITEM_NAME("Cut Item"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Temporary item\n"
+            "description which\n"
+            "will be replaced."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Cut,
+        .secondaryId = ITEM_HM_CUT,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
 };
 
 #undef ITEM_NAME

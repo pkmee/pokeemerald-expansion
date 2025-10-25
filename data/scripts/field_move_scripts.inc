@@ -1,59 +1,84 @@
 @ Interact with cuttable tree
 EventScript_CutTree::
-	lockall
-	checkfieldmove FIELD_MOVE_CUT, TRUE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
-	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	buffermovename STR_VAR_2, MOVE_CUT
-	msgbox Text_WantToCut, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
-	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
-	closemessage
-EventScript_CutTreeCommon:
-	isfollowerfieldmoveuser VAR_0x8004
-	setfieldeffectargument 3, VAR_0x8004 @ skip pose if so
-	dofieldeffect FLDEFF_USE_CUT_ON_TREE
-	waitstate
-EventScript_CutTreeDown:: @ fallthrough
-	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
-	call_if_eq VAR_0x8004, TRUE, EventScript_FollowerFieldMove
-	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
-	waitmovement 0
-	removeobject VAR_LAST_TALKED
-	releaseall
-	end
+    lockall
+    checkfieldmove FIELD_MOVE_CUT
+    copyvar VAR_0x8004, VAR_RESULT
+    goto_if_eq VAR_0x8004, PARTY_SIZE, EventScript_CheckTreeCantCut
+    goto_if_eq VAR_0x8004, PARTY_SIZE + 1, EventScript_CutTreeWithItem
 
-@ Use cut from party menu
-EventScript_UseCut::
-	lockall
-	goto EventScript_CutTreeCommon
+    @ --- A Pokémon that can learn the move was found ---
+    bufferpartymonnick STR_VAR_1, VAR_0x8004
+    buffermovename STR_VAR_2, MOVE_CUT
+	setfieldeffectargument 0, VAR_0x8004
+    msgbox Text_WantToCutWithPokemon, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
+    msgbox Text_MonHelpedCut, MSGBOX_DEFAULT
+    closemessage
+    goto EventScript_CutTreeCommon
 
-Movement_CutTreeDown:
-	cut_tree
-	step_end
+EventScript_CutTreeWithItem::
+    @ --- The key item was found ---
+    bufferitemname STR_VAR_2, ITEM_TEMP_CUT
+    msgbox Text_WantToCutWithItem, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
+    msgbox Text_PlayerUsedFieldTool, MSGBOX_DEFAULT
+    closemessage
+    setfieldeffectargument 1, TRUE @ Indicate that an item was used
+    goto EventScript_CutTreeCommon
+
+EventScript_CutTreeCommon::
+    @ --- This is the shared logic that performs the cut ---
+    isfollowerfieldmoveuser VAR_0x8004
+    setfieldeffectargument 3, VAR_0x8004 @ skip pose if so
+    dofieldeffect FLDEFF_USE_CUT_ON_TREE
+    waitstate
+    @ fallthrough to CutTreeDown
+
+EventScript_CutTreeDown::
+    setflag FLAG_SAFE_FOLLOWER_MOVEMENT
+    call_if_eq VAR_0x8004, TRUE, EventScript_FollowerFieldMove
+    applymovement VAR_LAST_TALKED, Movement_CutTreeDown
+    waitmovement 0
+    removeobject VAR_LAST_TALKED
+    releaseall
+    end
 
 EventScript_CheckTreeCantCut::
-	msgbox Text_CantCut, MSGBOX_DEFAULT
-	releaseall
-	end
+    msgbox Text_CantCut, MSGBOX_DEFAULT
+    releaseall
+    end
 
 EventScript_CancelCut::
-	closemessage
-	releaseall
-	end
+    closemessage
+    releaseall
+    end
 
-Text_WantToCut:
-	.string "This tree looks like it can be\n"
-	.string "CUT down!\p"
-	.string "Would you like to CUT it?$"
+@ Use cut from party menu (for the bag item)
+EventScript_UseCut::
+    lockall
+    goto EventScript_CutTreeCommon
 
-Text_MonUsedFieldMove:
-	.string "{STR_VAR_1} used {STR_VAR_2}!$"
+Movement_CutTreeDown:
+    cut_tree
+    step_end
+
+Text_WantToCutWithPokemon:
+    .string "This tree can be CUT down.\n"
+    .string "Want {STR_VAR_1} to help?$"
+
+Text_MonHelpedCut:
+    .string "{STR_VAR_1} helped you clear the way!$"
+
+Text_WantToCutWithItem:
+    .string "This tree can be CUT down.\n"
+    .string "Use the {STR_VAR_2}?$"
 
 Text_CantCut:
-	.string "This tree looks like it can be\n"
-	.string "CUT down!$"
+    .string "This tree looks like it can be\n"
+    .string "CUT down!$"
+
+Text_MonUsedFieldMove:
+    .string "{STR_VAR_1} used {STR_VAR_2}!$"
 
 @ Use rock smash from party menu
 EventScript_UseRockSmash::

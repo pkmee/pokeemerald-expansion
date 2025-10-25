@@ -2286,32 +2286,61 @@ bool8 ScrCmd_setmonmove(struct ScriptContext *ctx)
     return FALSE;
 }
 
+static u16 GetKeyItemForFieldMove(u16 move)
+{
+    switch (move)
+    {
+        case MOVE_CUT:
+            return ITEM_TEMP_CUT;
+        // You can add more cases here for future tools
+        // case MOVE_SURF:
+        //     return ITEM_TEMP_SURF;
+        default:
+            return ITEM_NONE;
+    }
+}
+
 bool8 ScrCmd_checkfieldmove(struct ScriptContext *ctx)
 {
     enum FieldMove fieldMove = ScriptReadByte(ctx);
-    bool32 doUnlockedCheck = ScriptReadByte(ctx);
-    u16 move;
+    u16 move = FieldMove_GetMoveId(fieldMove);
+    u16 keyItem = GetKeyItemForFieldMove(move);
+    u32 i;
 
-    Script_RequestEffects(SCREFF_V1);
-
-    gSpecialVar_Result = PARTY_SIZE;
-    if (doUnlockedCheck && !IsFieldMoveUnlocked(fieldMove))
-        return FALSE;
-
-    move = FieldMove_GetMoveId(fieldMove);
-    for (u32 i = 0; i < PARTY_SIZE; i++)
+    // 1. Check for a party Pokémon that can learn the move.
+    for (i = 0; i < gPlayerPartyCount; i++)
     {
-        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
-        if (!species)
-            break;
-        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && MonKnowsMove(&gPlayerParty[i], move) == TRUE)
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
-            gSpecialVar_Result = i;
-            gSpecialVar_0x8004 = species;
-            break;
+            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+            if (CanLearnTeachableMove(species, move))
+            {
+                // Pokémon found. Check for the badge flag.
+                if (IsFieldMoveUnlocked(fieldMove))
+                {
+                    gSpecialVar_Result = i; // Return party slot
+                    return FALSE; // Continue script execution
+                }
+                // Found a Pokémon but don't have the badge, so fail completely.
+                gSpecialVar_Result = PARTY_SIZE;
+                return FALSE;
+            }
         }
     }
 
+    // 2. If no Pokémon is found, check for the key item.
+    if (keyItem != ITEM_NONE && CheckBagHasItem(keyItem, 1))
+    {
+        // Key item found. Check for the badge flag.
+        if (IsFieldMoveUnlocked(fieldMove))
+        {
+            gSpecialVar_Result = PARTY_SIZE + 1; // Return special value for item
+            return FALSE;
+        }
+    }
+
+    // 3. If neither is found, or badge check fails, fail.
+    gSpecialVar_Result = PARTY_SIZE;
     return FALSE;
 }
 

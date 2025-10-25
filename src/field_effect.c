@@ -2822,7 +2822,18 @@ bool8 FldEff_FieldMoveShowMon(void)
 bool8 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
-    bool32 noDucking = gFieldEffectArguments[0] & SHOW_MON_CRY_NO_DUCKING;
+    bool32 noDucking;
+
+    // If argument 1 is TRUE, it means we are using an item.
+    if (gFieldEffectArguments[1] == TRUE)
+    {
+        // Skip showing a Pokémon and end this effect.
+        FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
+        return FALSE;
+    }
+
+    // This is the original code. It will now only run if we are using a Pokémon.
+    noDucking = gFieldEffectArguments[0] & SHOW_MON_CRY_NO_DUCKING;
     pokemon = &gPlayerParty[(u8)gFieldEffectArguments[0]];
     gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
     gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_IS_SHINY);
@@ -2832,6 +2843,7 @@ bool8 FldEff_FieldMoveShowMonInit(void)
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
     return FALSE;
 }
+
 
 static void (*const sFieldMoveShowMonOutdoorsEffectFuncs[])(struct Task *) = {
     FieldMoveShowMonOutdoorsEffect_Init,
