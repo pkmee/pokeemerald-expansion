@@ -4,6 +4,8 @@
 #include "global.h"
 #include "constants/field_move.h"
 
+bool8 CanUseFly(void);
+
 struct FieldMoveInfo
 {
     bool32 (*fieldMoveFunc)(void);

@@ -45,6 +45,8 @@
 #include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/songs.h"
+#include "region_map.h"
+#include "field_move.h"
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
@@ -81,6 +83,7 @@ static void CB2_OpenPokeblockFromBag(void);
 static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 static void ItemUseOnFieldCB_CutItem(u8 taskId);
+static void ItemUseOnFieldCB_Fly(u8 taskId);
 
 static const u8 sText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
@@ -1607,7 +1610,6 @@ static void ItemUseOnFieldCB_CutItem(u8 taskId)
     DestroyTask(taskId);
 }
 
-
 void ItemUseOutOfBattle_Cut(u8 taskId)
 {
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_CUTTABLE_TREE))
@@ -1617,6 +1619,58 @@ void ItemUseOutOfBattle_Cut(u8 taskId)
     }
     else
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+}
+
+void ItemUseOutOfBattle_Fly(u8 taskId)
+{
+    // First, perform all the checks to see if Fly can be used at all.
+    if (IsFieldMoveUnlocked(FIELD_MOVE_FLY) == TRUE
+     && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE
+     && !MenuHelpers_IsLinkActive())
+    {
+        // If the checks pass, now we figure out HOW the item was used.
+        // gTasks[taskId].data[3] is TRUE if it was a registered item.
+        if (gTasks[taskId].data[3] != TRUE)
+        {
+            // Case 1: Used from the Bag Menu.
+            // Set the callback directly to the fly map initializer and close the bag.
+            gBagMenu->newScreenCallback = CB2_OpenFlyMap;
+            Task_FadeAndCloseBagMenu(taskId);
+        }
+        else
+        {
+            // Case 2: Used as a Registered Item on the field.
+            // Fade the screen and set up a task to open the map.
+            FadeScreen(FADE_TO_BLACK, 0);
+            gTasks[taskId].func = Task_OpenRegisteredFly;
+        }
+    }
+    else
+    {
+        // If any of the checks fail, show the "can't use" message.
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
+}
+
+static void ItemUseOnFieldCB_Fly(u8 taskId)
+{
+    SetMainCallback2(CB2_OpenFlyMap);
+    DestroyTask(taskId);
+}
+
+void CB2_OpenFlyItemFromBag(void)
+{
+    CB2_OpenFlyMap();
+}
+
+void Task_OpenRegisteredFly(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(CB2_OpenFlyMap);
+        DestroyTask(taskId);
+    }
 }
 
 #undef tUsingRegisteredKeyItem
