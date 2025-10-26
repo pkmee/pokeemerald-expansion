@@ -277,3 +277,29 @@ void FieldCallback_Surf(void)
 {
     ScriptContext_SetupScript(EventScript_UseSurf);
 }
+
+bool8 CanUseFlash(void)
+{
+    u32 i;
+
+    // 1. Check for the badge
+    if (!IsFieldMoveUnlocked(FIELD_MOVE_FLASH))
+        return FALSE;
+
+    // 2. Check for a Pokémon that can learn Flash
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+            if (CanLearnTeachableMove(species, MOVE_FLASH))
+                return TRUE;
+        }
+    }
+
+    // 3. Check for the item
+    if (CheckBagHasItem(ITEM_TEMP_FLASH, 1))
+        return TRUE;
+
+    return FALSE;
+}

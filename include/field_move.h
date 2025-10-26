@@ -12,6 +12,7 @@ enum {
 void SetFieldMoveSource(u8 source);
 u8 GetFieldMoveSource(void);
 bool8 CanUseFly(void);
+bool8 CanUseFlash(void);
 
 struct FieldMoveInfo
 {

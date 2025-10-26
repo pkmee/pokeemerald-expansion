@@ -85,6 +85,9 @@ static bool32 IsValidLocationForVsSeeker(void);
 static void ItemUseOnFieldCB_CutItem(u8 taskId);
 static void ItemUseOnFieldCB_Surf(u8 taskId);
 static void ItemUseOnFieldCB_Strength(u8 taskId);
+static void ItemUseOnFieldCB_Flash(u8 taskId);
+static void ItemUseOnFieldCB_Flash(u8 taskId);
+static void ItemUseOnFieldCB_RockSmash(u8 taskId);
 
 static const u8 sText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
@@ -1707,6 +1710,46 @@ void ItemUseOutOfBattle_Strength(u8 taskId)
 static void ItemUseOnFieldCB_Strength(u8 taskId)
 {
     ScriptContext_SetupScript(EventScript_UseStrength);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_Flash(u8 taskId)
+{
+    // We only check for the badge here. The script will handle
+    // checking if the cave is actually dark.
+    if (IsFieldMoveUnlocked(FIELD_MOVE_FLASH) == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Flash;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
+}
+
+static void ItemUseOnFieldCB_Flash(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_UseFlash);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_RockSmash(u8 taskId)
+{
+    if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_BREAKABLE_ROCK) == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_RockSmash;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
+}
+
+static void ItemUseOnFieldCB_RockSmash(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_UseRockSmash);
     DestroyTask(taskId);
 }
 

@@ -80,42 +80,74 @@ Text_CantCut:
 Text_MonUsedFieldMove:
     .string "{STR_VAR_1} used {STR_VAR_2}!$"
 
-@ Use rock smash from party menu
-EventScript_UseRockSmash::
-	lockall
-	goto EventScript_RockSmashCommon
-
 @ Interact with smashable rock
 EventScript_RockSmash::
-	lockall
-	checkfieldmove FIELD_MOVE_ROCK_SMASH, TRUE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
-	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
-	msgbox Text_WantToSmash, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EventScript_CancelSmash
-	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
-	closemessage
+    lockall
+    checkfieldmove FIELD_MOVE_ROCK_SMASH
+    copyvar VAR_0x8004, VAR_RESULT
+    goto_if_eq VAR_0x8004, PARTY_SIZE, EventScript_CantSmashRock
+    goto_if_eq VAR_0x8004, PARTY_SIZE + 1, EventScript_RockSmashWithItem
+
+    @ --- Pokémon with learnable move was found ---
+    bufferpartymonnick STR_VAR_1, VAR_0x8004
+    setfieldeffectargument 0, VAR_0x8004
+    buffermovename STR_VAR_2, MOVE_ROCK_SMASH
+    msgbox Text_WantToSmashWithPokemon, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_CancelSmash
+    msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+    closemessage
+    goto EventScript_RockSmashCommon
+
+EventScript_RockSmashWithItem::
+    @ --- The key item was found ---
+    bufferitemname STR_VAR_2, ITEM_TEMP_ROCKSMASH
+    setfieldeffectargument 0, PARTY_SIZE
+    msgbox Text_WantToSmashWithItem, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_CancelSmash
+    msgbox Text_PlayerUsedRockHammer, MSGBOX_DEFAULT
+    closemessage
+    setfieldeffectargument 1, TRUE @ Signal item use to skip Pokémon animation
+    goto EventScript_RockSmashCommon
+
+@ Use rock smash from party menu
+EventScript_UseRockSmash::
+    lockall
+    goto EventScript_RockSmashCommon
+
 EventScript_RockSmashCommon:
-	@ check if follower should use the field move
-	isfollowerfieldmoveuser VAR_0x8004
-	setfieldeffectargument 3, VAR_0x8004 @ skip pose if so
-	dofieldeffect FLDEFF_USE_ROCK_SMASH
-	waitstate
-EventScript_SmashRock:: @ fallthrough
-	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
-	call_if_eq VAR_0x8004, TRUE, EventScript_FollowerFieldMove
-	applymovement VAR_LAST_TALKED, Movement_SmashRock
-	waitmovement 0
-	removeobject VAR_LAST_TALKED
-	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
-	goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash
-	special RockSmashWildEncounter
-	goto_if_eq VAR_RESULT, FALSE, EventScript_EndSmash
-	waitstate
-	releaseall
-	end
+    @ check if follower should use the field move
+    isfollowerfieldmoveuser VAR_0x8004
+    setfieldeffectargument 3, VAR_0x8004 @ skip pose if so
+    dofieldeffect FLDEFF_USE_ROCK_SMASH
+    waitstate
+    @ fallthrough to EventScript_SmashRock
+
+EventScript_SmashRock::
+    setflag FLAG_SAFE_FOLLOWER_MOVEMENT
+    call_if_eq VAR_0x8004, TRUE, EventScript_FollowerFieldMove
+    applymovement VAR_LAST_TALKED, Movement_SmashRock
+    waitmovement 0
+    removeobject VAR_LAST_TALKED
+    specialvar VAR_RESULT, TryUpdateRusturfTunnelState
+    goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash
+    special RockSmashWildEncounter
+    goto_if_eq VAR_RESULT, FALSE, EventScript_EndSmash
+    waitstate
+    releaseall
+    end
+
+@ --- Text ---
+Text_WantToSmashWithPokemon:
+    .string "This rock may be breakable.\n"
+    .string "Want {STR_VAR_1} to help?$"
+
+Text_WantToSmashWithItem:
+    .string "This rock may be breakable.\n"
+    .string "Use the {STR_VAR_2}?$"
+
+Text_PlayerUsedRockHammer:
+    .string "You used the {STR_VAR_2} and\n"
+	.string "smashed the rock!$"
 
 EventScript_FollowerFieldMove:
 	getdirectiontoface VAR_0x8005, OBJ_EVENT_ID_FOLLOWER, OBJ_EVENT_ID_PLAYER

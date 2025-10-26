@@ -14509,7 +14509,6 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_Cut,
-        .secondaryId = ITEM_HM_CUT,
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
@@ -14526,7 +14525,6 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_Fly,
-        .secondaryId = ITEM_HM_FLY,
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
@@ -14543,7 +14541,6 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_Surf,
-        .secondaryId = ITEM_HM_SURF,
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
@@ -14560,7 +14557,38 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
         .fieldUseFunc = ItemUseOutOfBattle_Strength,
-        .secondaryId = ITEM_HM_STRENGTH,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_TEMP_FLASH] =
+    {
+        .name = ITEM_NAME("Flash Item"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Temporary item\n"
+            "description which\n"
+            "will be replaced."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Flash,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
+    [ITEM_TEMP_ROCKSMASH] =
+    {
+        .name = ITEM_NAME("Rock Smash Item"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Temporary item\n"
+            "description which\n"
+            "will be replaced."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_RockSmash,
         .iconPic = gItemIcon_QuestionMark,
         .iconPalette = gItemIconPalette_QuestionMark,
     },
