@@ -1,3 +1,7 @@
+@##################################################################
+@ Flash
+@##################################################################
+
 @ This is the new entry point script for using Flash
 EventScript_TryUseFlash::
     lockall

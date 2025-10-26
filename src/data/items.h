@@ -14497,7 +14497,7 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
         
-    [ITEM_TEMP_CUT] =
+    [ITEM_CUT_TOOL] =
     {
         .name = ITEM_NAME("Cut Item"),
         .price = 0,
@@ -14513,7 +14513,7 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
 
-    [ITEM_TEMP_FLY] =
+    [ITEM_FLY_TOOL] =
     {
         .name = ITEM_NAME("Fly Item"),
         .price = 0,
@@ -14529,7 +14529,7 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
 
-    [ITEM_TEMP_SURF] =
+    [ITEM_SURF_TOOL] =
     {
         .name = ITEM_NAME("Surf Item"),
         .price = 0,
@@ -14545,7 +14545,7 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
 
-    [ITEM_TEMP_STRENGTH] =
+    [ITEM_STRENGTH_TOOL] =
     {
         .name = ITEM_NAME("Strength Item"),
         .price = 0,
@@ -14561,7 +14561,7 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
 
-    [ITEM_TEMP_FLASH] =
+    [ITEM_FLASH_TOOL] =
     {
         .name = ITEM_NAME("Flash Item"),
         .price = 0,
@@ -14577,7 +14577,7 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
 
-    [ITEM_TEMP_ROCKSMASH] =
+    [ITEM_ROCK_SMASH_TOOL] =
     {
         .name = ITEM_NAME("Rock Smash Item"),
         .price = 0,
@@ -14593,7 +14593,7 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
 
-    [ITEM_TEMP_WATERFALL] =
+    [ITEM_WATERFALL_TOOL] =
     {
         .name = ITEM_NAME("Waterfall Item"),
         .price = 0,
@@ -14610,7 +14610,7 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
 
-    [ITEM_TEMP_DIVE] =
+    [ITEM_DIVE_TOOL] =
     {
         .name = ITEM_NAME("Dive Item"),
         .price = 0,

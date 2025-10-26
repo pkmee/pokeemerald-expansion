@@ -1,3 +1,7 @@
+@##################################################################
+@ Surf
+@##################################################################
+
 EventScript_UseSurf::
     checkfieldmove FIELD_MOVE_SURF
     copyvar VAR_0x8004, VAR_RESULT
@@ -16,7 +20,7 @@ EventScript_UseSurf::
 
 EventScript_UseSurfWithItem::
     @ --- Item logic ---
-    bufferitemname STR_VAR_2, ITEM_TEMP_SURF
+    bufferitemname STR_VAR_2, ITEM_SURF_TOOL
     setfieldeffectargument 0, PARTY_SIZE
     lockall
     msgbox gText_WantToSurfWithItem, MSGBOX_YESNO

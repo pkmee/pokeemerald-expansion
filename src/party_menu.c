@@ -2825,6 +2825,7 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
 }
 
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
+// modified for field move implementation
 {
     u8 i, j;
 
@@ -2839,7 +2840,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         {
             u16 moveId = FieldMove_GetMoveId(i);
 
-            // Case 1: Fly and Flash
+            // Case 1: Fly and Flash (Defog would go here too)
             if (moveId == MOVE_FLY || moveId == MOVE_FLASH)
             {
                 if (IsFieldMoveUnlocked(i) && CanLearnTeachableMove(species, moveId))
@@ -2847,7 +2848,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
                     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, i + MENU_FIELD_MOVES);
                 }
             }
-            // Case 2: The 6 HMs to be excluded from the menu
+            // Case 2: The 6 HMs to be excluded from the menu (Rock Climb would go here too)
             else if (moveId == MOVE_CUT || moveId == MOVE_SURF || moveId == MOVE_STRENGTH
                   || moveId == MOVE_ROCK_SMASH || moveId == MOVE_DIVE || moveId == MOVE_WATERFALL)
             {

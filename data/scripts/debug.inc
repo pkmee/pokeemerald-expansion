@@ -145,7 +145,7 @@ Debug_EventScript_Script_1::
     setflag FLAG_BADGE06_GET
     setflag FLAG_BADGE07_GET
     setflag FLAG_BADGE08_GET
-	giveitem ITEM_TEMP_CUT, 1
+	giveitem ITEM_CUT_TOOL, 1
     msgbox Debug_Text_AllFlagsSet, MSGBOX_DEFAULT
     release
     end

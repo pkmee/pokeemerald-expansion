@@ -994,14 +994,14 @@
 
 #define ITEM_STRANGE_BALL 828
 
-#define ITEM_TEMP_CUT 829 // field items start
-#define ITEM_TEMP_FLY 830
-#define ITEM_TEMP_SURF 831
-#define ITEM_TEMP_STRENGTH 832
-#define ITEM_TEMP_FLASH 833
-#define ITEM_TEMP_ROCKSMASH 834
-#define ITEM_TEMP_WATERFALL 835
-#define ITEM_TEMP_DIVE 836 // field items end
+#define ITEM_CUT_TOOL 829 // field items start
+#define ITEM_FLY_TOOL 830
+#define ITEM_SURF_TOOL 831
+#define ITEM_STRENGTH_TOOL 832
+#define ITEM_FLASH_TOOL 833
+#define ITEM_ROCK_SMASH_TOOL 834
+#define ITEM_WATERFALL_TOOL 835
+#define ITEM_DIVE_TOOL 836 // field items end
 
 // HOPO BERRY
 // LEGEND PLATE
