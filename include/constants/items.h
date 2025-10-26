@@ -996,7 +996,7 @@
 
 #define ITEM_TEMP_CUT 829 // field items start
 #define ITEM_TEMP_FLY 830
-//#define ITEM_TEMP_SURF 831
+#define ITEM_TEMP_SURF 831
 //#define ITEM_TEMP_STRENGTH 832
 //#define ITEM_TEMP_FLASH 833
 //#define ITEM_TEMP_ROCKSMASH 834
@@ -1006,7 +1006,7 @@
 // HOPO BERRY
 // LEGEND PLATE
 
-#define ITEMS_COUNT 831
+#define ITEMS_COUNT 832
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

@@ -563,7 +563,9 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 
 static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
-    if (IsFieldMoveUnlocked(FIELD_MOVE_SURF) && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE
+    // Only check if the player is facing water.
+    // Moved IsFieldMoveUnlocked(FIELD_MOVE_SURF) from C code to the script to simplify + let EventScript_UseSurf manage badge, Pokemon & item checks.
+    if (IsPlayerFacingSurfableFishableWater() == TRUE
      && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_SURF)
      )
         return EventScript_UseSurf;
@@ -577,6 +579,7 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
         else
             return EventScript_CannotUseWaterfall;
     }
+
     return NULL;
 }
 

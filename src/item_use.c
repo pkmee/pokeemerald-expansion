@@ -83,6 +83,7 @@ static void CB2_OpenPokeblockFromBag(void);
 static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 static void ItemUseOnFieldCB_CutItem(u8 taskId);
+static void ItemUseOnFieldCB_Surf(u8 taskId);
 
 static const u8 sText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
@@ -1663,6 +1664,28 @@ void Task_OpenRegisteredFly(u8 taskId)
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_OpenFlyMap);
         DestroyTask(taskId);
+    }
+}
+
+static void ItemUseOnFieldCB_Surf(u8 taskId)
+{
+    // Run the surf script and destroy this task.
+    ScriptContext_SetupScript(EventScript_UseSurf);
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_Surf(u8 taskId)
+{
+    // Check if the player is facing water.
+    if (IsPlayerFacingSurfableFishableWater() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Surf;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        // Not facing water, so show the "can't use" message.
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
     }
 }
 

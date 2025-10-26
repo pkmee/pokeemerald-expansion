@@ -8,6 +8,8 @@
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "item.h"
+#include "script.h"
+#include "event_scripts.h"
 
 static u8 sFieldMoveSource = FIELD_MOVE_SOURCE_POKEMON;
 
@@ -269,4 +271,9 @@ bool8 CanUseFly(void)
 
     // If all checks fail, return FALSE.
     return FALSE;
+}
+
+void FieldCallback_Surf(void)
+{
+    ScriptContext_SetupScript(EventScript_UseSurf);
 }
