@@ -247,64 +247,82 @@ Text_CantSmash:
 	.string "may be able to smash it.$"
 
 EventScript_StrengthBoulder::
-	lockall
-	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
-	checkfieldmove FIELD_MOVE_STRENGTH, TRUE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
-	setfieldeffectargument 0, VAR_RESULT
-	msgbox Text_WantToStrength, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength
-	closemessage
-	dofieldeffect FLDEFF_USE_STRENGTH
-	waitstate
-	goto EventScript_ActivateStrength
-	end
+    lockall
+    goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
+    checkfieldmove FIELD_MOVE_STRENGTH
+    copyvar VAR_0x8004, VAR_RESULT
+    goto_if_eq VAR_0x8004, PARTY_SIZE, EventScript_CantStrength
+    goto_if_eq VAR_0x8004, PARTY_SIZE + 1, EventScript_StrengthWithItem
 
+    @ --- Pokémon with learnable move was found ---
+    bufferpartymonnick STR_VAR_1, VAR_0x8004
+    setfieldeffectargument 0, VAR_0x8004
+    msgbox Text_WantToUseStrengthWithPokemon, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength
+    closemessage
+    dofieldeffect FLDEFF_USE_STRENGTH
+    waitstate
+    goto EventScript_ActivateStrength
+
+EventScript_StrengthWithItem::
+    @ --- The key item was found ---
+    bufferitemname STR_VAR_2, ITEM_TEMP_STRENGTH
+    setfieldeffectargument 0, PARTY_SIZE @ No Pokémon is involved
+    msgbox Text_WantToUseStrengthWithItem, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength
+    closemessage
+    setfieldeffectargument 1, TRUE @ Signal item use to skip Pokémon animation
+    dofieldeffect FLDEFF_USE_STRENGTH
+    waitstate
+    goto EventScript_ActivateStrength
+
+@ This is for using the item from the bag menu
 EventScript_UseStrength::
-	lockall
-	dofieldeffect FLDEFF_USE_STRENGTH
-	waitstate
-	goto EventScript_ActivateStrength
-	end
+    lockall
+    dofieldeffect FLDEFF_USE_STRENGTH
+    waitstate
+    goto EventScript_ActivateStrength
+    end
 
 EventScript_ActivateStrength::
-	setflag FLAG_SYS_USE_STRENGTH
-	msgbox Text_MonUsedStrength, MSGBOX_DEFAULT
-	releaseall
-	end
+    setflag FLAG_SYS_USE_STRENGTH
+    msgbox Text_StrengthActivated, MSGBOX_DEFAULT
+    releaseall
+    end
 
 EventScript_CantStrength::
-	msgbox Text_CantStrength, MSGBOX_DEFAULT
-	releaseall
-	end
+    msgbox Text_CantStrength, MSGBOX_DEFAULT
+    releaseall
+    end
 
 EventScript_CheckActivatedBoulder::
-	msgbox Text_StrengthActivated, MSGBOX_DEFAULT
-	releaseall
-	end
+    msgbox Text_StrengthAlreadyActivated, MSGBOX_DEFAULT
+    releaseall
+    end
 
 EventScript_CancelStrength::
-	closemessage
-	releaseall
-	end
+    closemessage
+    releaseall
+    end
 
-Text_WantToStrength:
-	.string "It's a big boulder, but a POKéMON\n"
-	.string "may be able to push it aside.\p"
-	.string "Would you like to use STRENGTH?$"
+Text_WantToUseStrengthWithPokemon:
+    .string "It's a big boulder.\n"
+    .string "Want {STR_VAR_1} to help move it?$"
 
-Text_MonUsedStrength:
-	.string "{STR_VAR_1} used STRENGTH!\p"
-	.string "{STR_VAR_1}'s STRENGTH made it\n"
-	.string "possible to move boulders around!$"
-
-Text_CantStrength:
-	.string "It's a big boulder, but a POKéMON\n"
-	.string "may be able to push it aside.$"
+Text_WantToUseStrengthWithItem:
+    .string "It's a big boulder.\n"
+    .string "Use the {STR_VAR_2}?$"
 
 Text_StrengthActivated:
-	.string "STRENGTH made it possible to move\n"
-	.string "boulders around.$"
+    .string "STRENGTH made it possible to move\n"
+    .string "boulders around!$"
+
+Text_StrengthAlreadyActivated:
+    .string "STRENGTH is already in effect.$"
+
+Text_CantStrength:
+    .string "It's a big boulder, but a POKéMON\n"
+    .string "may be able to push it aside.$"
 
 EventScript_UseWaterfall::
 	lockall

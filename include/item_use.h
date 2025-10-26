@@ -60,10 +60,9 @@ void CB2_OpenFlyItemFromBag(void);
 void Task_OpenRegisteredFly(u8 taskId);
 
 void ItemUseOutOfBattle_Surf(u8 taskId);
-//void ItemUseOnFieldCB_Surf(u8);
-//
-//void ItemUseOutOfBattle_Strength(u8);
-//void ItemUseOnFieldCB_Strength(u8);
+
+void ItemUseOutOfBattle_Strength(u8);
+//void ItemUseOnFieldCB_Strength(u8); don't need this because it's static void in the file
 //
 //void ItemUseOutOfBattle_Flash(u8);
 //void ItemUseOnFieldCB_Flash(u8 taskId);

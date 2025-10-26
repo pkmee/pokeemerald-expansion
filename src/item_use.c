@@ -84,6 +84,7 @@ static void ItemUseOnFieldCB_Honey(u8 taskId);
 static bool32 IsValidLocationForVsSeeker(void);
 static void ItemUseOnFieldCB_CutItem(u8 taskId);
 static void ItemUseOnFieldCB_Surf(u8 taskId);
+static void ItemUseOnFieldCB_Strength(u8 taskId);
 
 static const u8 sText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
@@ -1687,6 +1688,26 @@ void ItemUseOutOfBattle_Surf(u8 taskId)
         // Not facing water, so show the "can't use" message.
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
     }
+}
+
+// Add the function definition
+void ItemUseOutOfBattle_Strength(u8 taskId)
+{
+    if (IsFieldMoveUnlocked(FIELD_MOVE_STRENGTH) == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Strength;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
+}
+
+static void ItemUseOnFieldCB_Strength(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_UseStrength);
+    DestroyTask(taskId);
 }
 
 #undef tUsingRegisteredKeyItem

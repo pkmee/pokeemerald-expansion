@@ -2296,6 +2296,8 @@ static u16 GetKeyItemForFieldMove(u16 move)
             return ITEM_TEMP_FLY;
         case MOVE_SURF:
             return ITEM_TEMP_SURF;
+        case MOVE_STRENGTH:
+            return ITEM_TEMP_STRENGTH;
         // Add more cases here for future tools
         default:
             return ITEM_NONE;
