@@ -570,15 +570,12 @@ static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metati
      )
         return EventScript_UseSurf;
 
+    // --- NEW SIMPLIFIED WATERFALL LOGIC ---
+    // We only check if the player is facing a waterfall, the script will manage the rest.
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE
      && CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_WATERFALL)
      )
-    {
-        if (IsFieldMoveUnlocked(FIELD_MOVE_WATERFALL) && IsPlayerSurfingNorth() == TRUE)
-            return EventScript_UseWaterfall;
-        else
-            return EventScript_CannotUseWaterfall;
-    }
+        return EventScript_UseWaterfall;
 
     return NULL;
 }

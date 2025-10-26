@@ -14593,6 +14593,23 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
 
+    [ITEM_TEMP_WATERFALL] =
+    {
+        .name = ITEM_NAME("Waterfall Item"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Temporary item\n"
+            "description which\n"
+            "will be replaced."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Waterfall,
+        .secondaryId = ITEM_HM_WATERFALL,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
 };
 
 #undef ITEM_NAME

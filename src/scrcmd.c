@@ -2302,6 +2302,8 @@ static u16 GetKeyItemForFieldMove(u16 move)
             return ITEM_TEMP_FLASH;
         case MOVE_ROCK_SMASH:
             return ITEM_TEMP_ROCKSMASH;
+        case MOVE_WATERFALL:
+            return ITEM_TEMP_WATERFALL;
         // Add more cases here for future tools
         default:
             return ITEM_NONE;

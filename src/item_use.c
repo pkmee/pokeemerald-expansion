@@ -88,6 +88,7 @@ static void ItemUseOnFieldCB_Strength(u8 taskId);
 static void ItemUseOnFieldCB_Flash(u8 taskId);
 static void ItemUseOnFieldCB_Flash(u8 taskId);
 static void ItemUseOnFieldCB_RockSmash(u8 taskId);
+static void ItemUseOnFieldCB_Waterfall(u8 taskId);
 
 static const u8 sText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
@@ -1750,6 +1751,32 @@ void ItemUseOutOfBattle_RockSmash(u8 taskId)
 static void ItemUseOnFieldCB_RockSmash(u8 taskId)
 {
     ScriptContext_SetupScript(EventScript_UseRockSmash);
+    DestroyTask(taskId);
+}
+
+static bool8 IsPlayerFacingWaterfall(void)
+{
+    s16 x, y;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    return MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y));
+}
+
+void ItemUseOutOfBattle_Waterfall(u8 taskId)
+{
+    if (IsPlayerFacingWaterfall() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Waterfall;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
+}
+
+static void ItemUseOnFieldCB_Waterfall(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_UseWaterfall);
     DestroyTask(taskId);
 }
 

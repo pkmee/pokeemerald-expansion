@@ -357,39 +357,58 @@ Text_CantStrength:
     .string "may be able to push it aside.$"
 
 EventScript_UseWaterfall::
-	lockall
-	checkfieldmove FIELD_MOVE_WATERFALL
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
-	msgbox Text_WantToWaterfall, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
-	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
-	hidefollowernpc
-	dofieldeffect FLDEFF_USE_WATERFALL
-	callnative FollowerNPC_WarpSetEnd
-	goto EventScript_EndWaterfall
+    lockall
+    checkfieldmove FIELD_MOVE_WATERFALL
+    copyvar VAR_0x8004, VAR_RESULT
+    goto_if_eq VAR_0x8004, PARTY_SIZE, EventScript_CantWaterfall
+    goto_if_eq VAR_0x8004, PARTY_SIZE + 1, EventScript_UseWaterfallWithItem
 
+    @ --- Pokémon with learnable move was found ---
+    bufferpartymonnick STR_VAR_1, VAR_0x8004
+    setfieldeffectargument 0, VAR_0x8004
+    msgbox Text_WantToUseWaterfallWithPokemon, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
+    msgbox Text_MonHelpedWaterfall, MSGBOX_DEFAULT
+    goto EventScript_UseWaterfallCommon
+
+EventScript_UseWaterfallWithItem::
+    @ --- The key item was found ---
+    bufferitemname STR_VAR_2, ITEM_TEMP_WATERFALL
+    setfieldeffectargument 0, PARTY_SIZE
+    msgbox Text_WantToUseWaterfallWithItem, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
+    msgbox Text_PlayerUsedWaterfallItem, MSGBOX_DEFAULT
+    setfieldeffectargument 1, TRUE @ Signal item use to skip Pokémon animation
+    goto EventScript_UseWaterfallCommon
+
+EventScript_UseWaterfallCommon:
+    hidefollowernpc
+    dofieldeffect FLDEFF_USE_WATERFALL
+    callnative FollowerNPC_WarpSetEnd
+    goto EventScript_EndWaterfall
 EventScript_CannotUseWaterfall::
-	lockall
-
+    lockall
 EventScript_CantWaterfall::
-	msgbox Text_CantWaterfall, MSGBOX_DEFAULT
-
+    msgbox Text_CantWaterfall, MSGBOX_DEFAULT
+    @ fallthrough to EventScript_EndWaterfall
 EventScript_EndWaterfall::
-	releaseall
-	end
-
+    releaseall
+    end
+	
+@ --- New Text Strings ---
+Text_WantToUseWaterfallWithPokemon:
+    .string "It's a large waterfall.\n"
+    .string "Want {STR_VAR_1} to help you ascend?$"
+Text_MonHelpedWaterfall:
+    .string "{STR_VAR_1} helped you scale the waterfall!$"
+Text_WantToUseWaterfallWithItem:
+    .string "It's a large waterfall.\n"
+    .string "Use the {STR_VAR_2}?$"
+Text_PlayerUsedWaterfallItem:
+    .string "You used the {STR_VAR_2} to scale the waterfall!$"
 Text_CantWaterfall:
-	.string "A wall of water is crashing down with\n"
-	.string "a mighty roar.$"
-
-Text_WantToWaterfall:
-	.string "It's a large waterfall.\n"
-	.string "Would you like to use WATERFALL?$"
-
-Text_MonUsedWaterfall:
-	.string "{STR_VAR_1} used WATERFALL.$"
+    .string "A wall of water is crashing down with\n"
+    .string "a mighty roar.$"
 
 EventScript_UseDive::
 	lockall
