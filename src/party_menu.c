@@ -2826,21 +2826,45 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
 
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 {
-    u8 i;
+    u8 i, j;
 
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
 
-    // Add field moves to action list
     u16 species = GetMonData(&mons[slotId], MON_DATA_SPECIES);
     if (!GetMonData(&mons[slotId], MON_DATA_IS_EGG))
     {
+        // Loop through all possible field moves
         for (i = 0; i < FIELD_MOVES_COUNT; i++)
         {
-            // Check BOTH if the move is unlocked AND if the Pokémon can learn it.
-            if (IsFieldMoveUnlocked(i) && CanLearnTeachableMove(species, FieldMove_GetMoveId(i)))
+            u16 moveId = FieldMove_GetMoveId(i);
+
+            // Case 1: Fly and Flash
+            if (moveId == MOVE_FLY || moveId == MOVE_FLASH)
             {
-                AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, i + MENU_FIELD_MOVES);
+                if (IsFieldMoveUnlocked(i) && CanLearnTeachableMove(species, moveId))
+                {
+                    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, i + MENU_FIELD_MOVES);
+                }
+            }
+            // Case 2: The 6 HMs to be excluded from the menu
+            else if (moveId == MOVE_CUT || moveId == MOVE_SURF || moveId == MOVE_STRENGTH
+                  || moveId == MOVE_ROCK_SMASH || moveId == MOVE_DIVE || moveId == MOVE_WATERFALL)
+            {
+                // Do nothing, effectively removing them from the menu.
+            }
+            // Case 3: All other field moves (Dig, Soft-Boiled, etc.)
+            else
+            {
+                // Use the original logic: check if the Pokémon knows the move.
+                for (j = 0; j < MAX_MON_MOVES; j++)
+                {
+                    if (GetMonData(&mons[slotId], MON_DATA_MOVE1 + j) == moveId)
+                    {
+                        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, i + MENU_FIELD_MOVES);
+                        break; // Move found, stop checking this Pokémon's moves
+                    }
+                }
             }
         }
     }

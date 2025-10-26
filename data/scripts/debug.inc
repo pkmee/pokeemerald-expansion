@@ -155,8 +155,8 @@ Debug_Text_AllFlagsSet:
 	end
 
 Debug_EventScript_Script_2::
-	release
-	end
+    release
+    end
 
 Debug_EventScript_Script_3::
 	release
