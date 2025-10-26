@@ -47,6 +47,7 @@
 #include "constants/songs.h"
 #include "region_map.h"
 #include "field_move.h"
+#include "field_control_avatar.h"
 
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
@@ -1778,6 +1779,26 @@ static void ItemUseOnFieldCB_Waterfall(u8 taskId)
 {
     ScriptContext_SetupScript(EventScript_UseWaterfall);
     DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_Dive(u8 taskId)
+{
+    u8 diveWarpStatus = TrySetDiveWarp();
+
+    if (diveWarpStatus == 2) // On a dive spot
+    {
+        ScriptContext_SetupScript(EventScript_UseDive);
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else if (diveWarpStatus == 1) // On a surfacing spot
+    {
+        ScriptContext_SetupScript(EventScript_UseDiveUnderwater);
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else // Not a valid spot
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].data[3]);
+    }
 }
 
 #undef tUsingRegisteredKeyItem

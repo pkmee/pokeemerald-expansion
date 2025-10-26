@@ -394,7 +394,7 @@ EventScript_CantWaterfall::
 EventScript_EndWaterfall::
     releaseall
     end
-	
+
 @ --- New Text Strings ---
 Text_WantToUseWaterfallWithPokemon:
     .string "It's a large waterfall.\n"
@@ -411,58 +411,107 @@ Text_CantWaterfall:
     .string "a mighty roar.$"
 
 EventScript_UseDive::
-	lockall
-	checkfieldmove FIELD_MOVE_DIVE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantDive
-	copyvar 0x8004 VAR_RESULT
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
-	setfieldeffectargument 1, 1
-	msgbox Text_WantToDive, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EventScript_EndDive
-	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
-	hidefollowernpc
-	setfieldeffectargument 0, VAR_0x8004
-	setfieldeffectargument 1, 1
-	dofieldeffect FLDEFF_USE_DIVE
-	goto EventScript_EndDive
-	end
+    lockall
+    checkfieldmove FIELD_MOVE_DIVE
+    copyvar VAR_0x8004, VAR_RESULT
+    goto_if_eq VAR_0x8004, PARTY_SIZE, EventScript_CantDive
+    goto_if_eq VAR_0x8004, PARTY_SIZE + 1, EventScript_UseDiveWithItem
+
+    @ --- Pokémon with learnable move was found ---
+    bufferpartymonnick STR_VAR_1, VAR_0x8004
+    setfieldeffectargument 0, VAR_0x8004
+    msgbox Text_WantToDiveWithPokemon, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_EndDive
+    msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+    goto EventScript_UseDiveCommon
+
+EventScript_UseDiveWithItem::
+    @ --- The key item was found ---
+    bufferitemname STR_VAR_2, ITEM_TEMP_DIVE
+    setfieldeffectargument 0, PARTY_SIZE
+    msgbox Text_WantToDiveWithItem, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_EndDive
+    msgbox Text_PlayerUsedDiveItem, MSGBOX_DEFAULT
+    setfieldeffectargument 1, TRUE @ Signal item use
+    goto EventScript_UseDiveCommon
+
+EventScript_UseDiveCommon:
+    hidefollowernpc
+    dofieldeffect FLDEFF_USE_DIVE
+    goto EventScript_EndDive
+    end
 
 EventScript_CantDive::
-	msgbox Text_CantDive, MSGBOX_DEFAULT
-	releaseall
-	end
+    msgbox Text_CantDive, MSGBOX_DEFAULT
+    releaseall
+    end
 
 EventScript_EndDive::
-	releaseall
-	end
+    releaseall
+    end
 
 EventScript_UseDiveUnderwater::
-	lockall
-	checkfieldmove FIELD_MOVE_DIVE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSurface
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
-	setfieldeffectargument 1, 1
-	msgbox Text_WantToSurface, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EventScript_NoSurface
-	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
-	hidefollowernpc
-	dofieldeffect FLDEFF_USE_DIVE
-	goto EventScript_EndSurface
-	end
+    lockall
+    checkfieldmove FIELD_MOVE_DIVE
+    copyvar VAR_0x8004, VAR_RESULT
+    goto_if_eq VAR_0x8004, PARTY_SIZE, EventScript_CantSurface
+    goto_if_eq VAR_0x8004, PARTY_SIZE + 1, EventScript_UseSurfaceWithItem
+
+    @ --- Pokémon with learnable move was found ---
+    bufferpartymonnick STR_VAR_1, VAR_0x8004
+    setfieldeffectargument 0, VAR_0x8004
+    msgbox Text_WantToSurfaceWithPokemon, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_NoSurface
+    msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+    goto EventScript_UseSurfaceCommon
+
+EventScript_UseSurfaceWithItem::
+    @ --- The key item was found ---
+    bufferitemname STR_VAR_2, ITEM_TEMP_DIVE
+    setfieldeffectargument 0, PARTY_SIZE
+    msgbox Text_WantToSurfaceWithItem, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, EventScript_NoSurface
+    msgbox Text_PlayerUsedDiveItem, MSGBOX_DEFAULT
+    setfieldeffectargument 1, TRUE @ Signal item use
+    goto EventScript_UseSurfaceCommon
+
+EventScript_UseSurfaceCommon:
+    hidefollowernpc
+    dofieldeffect FLDEFF_USE_DIVE
+    goto EventScript_EndSurface
+    end
 
 EventScript_CantSurface::
-	lockall
-	msgbox Text_CantSurface, MSGBOX_DEFAULT
-	goto EventScript_EndSurface
-	end
+    lockall
+    msgbox Text_CantSurface, MSGBOX_DEFAULT
+    goto EventScript_EndSurface
+    end
 
 EventScript_EndSurface::
-	callnative SetFollowerNPCSurfSpriteAfterDive
+    callnative SetFollowerNPCSurfSpriteAfterDive
 EventScript_NoSurface::
-	releaseall
-	end
+    releaseall
+    end
+
+@ --- New Text ---
+Text_WantToDiveWithPokemon:
+    .string "The sea is deep here.\n"
+    .string "Want {STR_VAR_1} to help you DIVE?$"
+
+Text_WantToDiveWithItem:
+    .string "The sea is deep here.\n"
+    .string "Use the {STR_VAR_2}?$"
+
+Text_PlayerUsedDiveItem:
+    .string "You used the {STR_VAR_2}.$"
+
+Text_WantToSurfaceWithPokemon:
+    .string "Light is filtering down from above.\n"
+    .string "Want {STR_VAR_1} to help you surface?$"
+
+Text_WantToSurfaceWithItem:
+    .string "Light is filtering down from above.\n"
+    .string "Use the {STR_VAR_2}?$"
 
 EventScript_DigCommon:
 	isfollowerfieldmoveuser VAR_0x8004

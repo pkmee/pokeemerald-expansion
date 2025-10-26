@@ -1001,12 +1001,12 @@
 #define ITEM_TEMP_FLASH 833
 #define ITEM_TEMP_ROCKSMASH 834
 #define ITEM_TEMP_WATERFALL 835
-//#define ITEM_TEMP_DIVE 836 // field items end
+#define ITEM_TEMP_DIVE 836 // field items end
 
 // HOPO BERRY
 // LEGEND PLATE
 
-#define ITEMS_COUNT 836
+#define ITEMS_COUNT 837
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

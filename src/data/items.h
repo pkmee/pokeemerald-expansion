@@ -14610,6 +14610,23 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuestionMark,
     },
 
+    [ITEM_TEMP_DIVE] =
+    {
+        .name = ITEM_NAME("Dive Item"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Temporary item\n"
+            "description which\n"
+            "will be replaced."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Dive,
+        .secondaryId = ITEM_HM_DIVE,
+        .iconPic = gItemIcon_QuestionMark,
+        .iconPalette = gItemIconPalette_QuestionMark,
+    },
+
 };
 
 #undef ITEM_NAME
