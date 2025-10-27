@@ -771,6 +771,12 @@
 	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
 	.endm
 
+	@ Starts a single trainer battle with pre-selected Pokémon.
+	@ This macro handles the party selection and restoration logic.
+	.macro trainerbattle_selectmons trainer:req, lose_text:req, post_battle_script:req
+	trainerbattle TRAINER_BATTLE_SINGLE, LOCALID_NONE, \trainer, NULL, \lose_text, \post_battle_script, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+	.endm
+
 	@ Starts a double battle with the player against two trainers
 	@ Takes two trainers and defeat text for each
 	.macro trainerbattle_two_trainers trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req
