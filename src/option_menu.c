@@ -17,6 +17,7 @@
 #include "string_util.h"
 #include "gba/m4a_internal.h"
 #include "constants/rgb.h"
+#include "constants/battle_mode.h"
 
 #define tMenuSelection data[0]
 #define tTextSpeed data[1]
@@ -26,6 +27,7 @@
 #define tButtonMode data[5]
 #define tWindowFrameType data[6]
 #define tFollower data[7]
+#define tBattleMode data[8]
 
 enum
 {
@@ -43,6 +45,7 @@ enum
 enum
 {
     MENUITEM_FOLLOWER,
+    MENUITEM_BATTLEMODE,
     MENUITEM_CANCEL_PG2,
     MENUITEM_COUNT_PG2,
 };
@@ -63,6 +66,7 @@ enum
 
 //Pg2
 #define YPOS_FOLLOWER        (MENUITEM_FOLLOWER * 16)
+#define YPOS_BATTLEMODE      (MENUITEM_BATTLEMODE * 16)
 
 #define PAGE_COUNT  2
 
@@ -87,6 +91,8 @@ static u8 FrameType_ProcessInput(u8 selection);
 static void FrameType_DrawChoices(u8 selection);
 static u8 ButtonMode_ProcessInput(u8 selection);
 static void ButtonMode_DrawChoices(u8 selection);
+static u8 BattleMode_ProcessInput(u8 selection);
+static void BattleMode_DrawChoices(u8 selection);
 static void DrawTextOption(void);
 static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
@@ -112,6 +118,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 static const u8 *const sOptionMenuItemsNames_Pg2[MENUITEM_COUNT_PG2] =
 {
     [MENUITEM_FOLLOWER]        = gText_Follower,
+    [MENUITEM_BATTLEMODE]      = gText_BattleMode,
     [MENUITEM_CANCEL_PG2]      = gText_OptionMenuCancel,
 };
 
@@ -187,6 +194,7 @@ static void ReadAllCurrentSettings(u8 taskId)
     gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
     gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
     gTasks[taskId].tFollower = FlagGet(FLAG_POKEMON_FOLLOWERS);
+    gTasks[taskId].tBattleMode = gSaveBlock2Ptr->battleMode;
 }
 
 static void DrawOptionsPg1(u8 taskId)
@@ -198,6 +206,7 @@ static void DrawOptionsPg1(u8 taskId)
     Sound_DrawChoices(gTasks[taskId].tSound);
     ButtonMode_DrawChoices(gTasks[taskId].tButtonMode);
     FrameType_DrawChoices(gTasks[taskId].tWindowFrameType);
+    BattleMode_DrawChoices(gTasks[taskId].tBattleMode);
     HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
     CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
 }
@@ -206,6 +215,7 @@ static void DrawOptionsPg2(u8 taskId)
 {
     ReadAllCurrentSettings(taskId);
     Follower_DrawChoices(gTasks[taskId].tFollower);
+    BattleMode_DrawChoices(gTasks[taskId].tBattleMode);
     HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
     CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
 }
@@ -499,6 +509,13 @@ static void Task_OptionMenuProcessInput_Pg2(u8 taskId)
             if (previousOption != gTasks[taskId].tFollower)
                 Follower_DrawChoices(gTasks[taskId].tFollower);
             break;
+        case MENUITEM_BATTLEMODE:
+            previousOption = gTasks[taskId].tBattleMode;
+            gTasks[taskId].tBattleMode = BattleMode_ProcessInput(gTasks[taskId].tBattleMode);
+
+            if (previousOption != gTasks[taskId].tBattleMode)
+                BattleMode_DrawChoices(gTasks[taskId].tBattleMode);
+            break;
 
         default:
             return;
@@ -520,6 +537,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsSound = gTasks[taskId].tSound;
     gSaveBlock2Ptr->optionsButtonMode = gTasks[taskId].tButtonMode;
     gSaveBlock2Ptr->optionsWindowFrameType = gTasks[taskId].tWindowFrameType;
+    gSaveBlock2Ptr->battleMode = gTasks[taskId].tBattleMode;
     gTasks[taskId].tFollower == 0 ? FlagClear(FLAG_POKEMON_FOLLOWERS) : FlagSet(FLAG_POKEMON_FOLLOWERS);
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
@@ -801,6 +819,52 @@ static void ButtonMode_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_ButtonTypeLR, xLR, YPOS_BUTTONMODE, styles[1]);
 
     DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(FONT_NORMAL, gText_ButtonTypeLEqualsA, 198), YPOS_BUTTONMODE, styles[2]);
+}
+
+static u8 BattleMode_ProcessInput(u8 selection)
+{
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        if (selection <= 1)
+            selection++;
+        else
+            selection = 0;
+
+        sArrowPressed = TRUE;
+    }
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        if (selection != 0)
+            selection--;
+        else
+            selection = 2;
+
+        sArrowPressed = TRUE;
+    }
+    return selection;
+}
+
+static void BattleMode_DrawChoices(u8 selection)
+{
+    u8 styles[3];
+    s32 widthSingles, widthDoubles, widthMixed, xMid;
+
+    styles[0] = 0;
+    styles[1] = 0;
+    styles[2] = 0;
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleModeSingles, 104, YPOS_BATTLEMODE, styles[0]);
+
+    widthSingles = GetStringWidth(FONT_NORMAL, gText_BattleModeSingles, 0);
+    widthDoubles = GetStringWidth(FONT_NORMAL, gText_BattleModeDoubles, 0);
+    widthMixed = GetStringWidth(FONT_NORMAL, gText_BattleModeMixed, 0);
+
+    widthDoubles -= 94;
+    xMid = (widthSingles - widthDoubles - widthMixed) / 2 + 104;
+    DrawOptionMenuChoice(gText_BattleModeDoubles, xMid, YPOS_BATTLEMODE, styles[1]);
+
+    DrawOptionMenuChoice(gText_BattleModeMixed, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleModeMixed, 198), YPOS_BATTLEMODE, styles[2]);
 }
 
 static void DrawTextOption(void)
