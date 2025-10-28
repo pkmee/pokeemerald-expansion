@@ -73934,7 +73934,10 @@
       "MOVE_POISON_JAB",
       "MOVE_BRAVE_BIRD",
       "MOVE_WORK_UP",
-      "MOVE_THROAT_CHOP"
+      "MOVE_THROAT_CHOP",
+      "MOVE_CUT",
+      "MOVE_STRENGTH",
+      "MOVE_ROCK_SMASH"
     ],
     "EggMoves": [
       "MOVE_COUNTER",
@@ -74148,7 +74151,10 @@
       "MOVE_FOUL_PLAY",
       "MOVE_STORED_POWER",
       "MOVE_ALLY_SWITCH",
-      "MOVE_DAZZLING_GLEAM"
+      "MOVE_DAZZLING_GLEAM",
+      "MOVE_STRENGTH",
+      "MOVE_FLASH",
+      "MOVE_ROCK_SMASH"
     ],
     "EggMoves": [
       "MOVE_CONFUSE_RAY",
@@ -80134,7 +80140,8 @@
       "MOVE_FOUL_PLAY",
       "MOVE_STORED_POWER",
       "MOVE_ALLY_SWITCH",
-      "MOVE_DAZZLING_GLEAM"
+      "MOVE_DAZZLING_GLEAM",
+      "MOVE_FLASH"
     ],
     "EggMoves": [
       "MOVE_CONFUSE_RAY",
