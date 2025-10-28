@@ -241,7 +241,7 @@ void ReducePlayerPartyToSelectedMons(void)
 
 // Note: When control returns to the event script, gSpecialVar_Result will be
 // TRUE if the party selection was successful.
-void ChooseVGCPartyForBattle(void)
+void ChoosePartyForStandardBattle(void)
 {
     gMain.savedCallback = CB2_ReturnFromChooseVGCParty;
     VarSet(VAR_FRONTIER_FACILITY, FACILITY_MULTI_OR_EREADER); // Re-using this var, but it's not strictly for frontier

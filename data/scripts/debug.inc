@@ -155,34 +155,23 @@ Debug_Text_AllFlagsSet:
 	end
 
 Debug_EventScript_Script_2::
-    special SavePlayerParty
-    fadescreen FADE_TO_BLACK
-    special ChooseVGCPartyForBattle
-    waitstate
-    goto_if_ne VAR_RESULT, 0, Debug_EventScript_VGCBattleRoxanne
-    special LoadPlayerParty
-    goto Debug_EventScript_MaybeLater
-    end
-
-Debug_EventScript_VGCBattleRoxanne::
-    special ReducePlayerPartyToSelectedMons
-    setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
-    setvar VAR_0x8005, FRONTIER_DATA_SELECTED_MON_ORDER
-    special CallFrontierUtilFunc @ saves the mon order, so the non-selected mons get restored afterwards
-    trainerbattle_selectmons TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneDefeat, Debug_EventScript_PostBattleRestoreParty
-    goto Debug_EventScript_EndBattleFlow
+    trainerbattle_special TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneDefeat, Debug_EventScript_PostBattleRestoreParty, 1
     end
 
 Debug_EventScript_PostBattleRestoreParty::
+    call Debug_EventScript_RestoreParty
     switch VAR_RESULT
     case 1, RustboroCity_Gym_EventScript_RoxanneDefeated
-    case 0, Debug_EventScript_WhiteOutAndRestoreParty
+    case 0, Debug_EventScript_WhiteOut
     end
 
-Debug_EventScript_WhiteOutAndRestoreParty::
+Debug_EventScript_RestoreParty::
     setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SAVE_PARTY
     special CallFrontierUtilFunc
     special LoadPlayerParty
+    return
+
+Debug_EventScript_WhiteOut::
     fadescreen FADE_TO_BLACK
     special SetCB2WhiteOut
     waitstate
