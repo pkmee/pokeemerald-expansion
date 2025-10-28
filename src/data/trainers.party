@@ -746,14 +746,14 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Smack Down  
 - Rock Throw  
 - Mud Shot  
-- Rock Slide
+- Rock Tomb
 
 Rolycoly @ Oran Berry
 Ability: Steam Engine
 Level: 15
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Smokescreen
-- Rock Slide
+- Rock Tomb
 - Rapid Spin
 - Smack Down
 
@@ -761,9 +761,9 @@ Growlithe-Hisui @ Sitrus Berry
 Ability: Intimidate
 Level: 15
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
-- Rock Slide
+- Rock Tomb
 - Bite
-- Flame Wheel
+- Ember
 - Helping Hand
 
 === TRAINER_BRENDAN_RUSTBORO_TREECKO ===

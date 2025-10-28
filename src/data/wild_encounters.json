@@ -467,12 +467,12 @@
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_SMOLIV"
+                "species": "SPECIES_WOOPER_PALDEA"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_SMOLIV"
+                "species": "SPECIES_WOOPER_PALDEA"
               },
               {
                 "min_level": 5,
@@ -1365,7 +1365,7 @@
               {
                 "min_level": 7,
                 "max_level": 7,
-                "species": "SPECIES_LECHONK"
+                "species": "SPECIES_WOOPER_PALDEA"
               },
               {
                 "min_level": 7,
@@ -1410,7 +1410,7 @@
               {
                 "min_level": 8,
                 "max_level": 8,
-                "species": "SPECIES_LECHONK"
+                "species": "SPECIES_WOOPER_PALDEA"
               },
               {
                 "min_level": 7,
@@ -1420,7 +1420,7 @@
               {
                 "min_level": 8,
                 "max_level": 8,
-                "species": "SPECIES_LECHONK"
+                "species": "SPECIES_WOOPER_PALDEA"
               }
             ]
           }
