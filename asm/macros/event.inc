@@ -771,7 +771,30 @@
 	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, LOCALID_NONE, \trainer, NULL, \lose_text, NULL, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
 	.endm
 
-	@ Starts a double battle with the player against two trainers
+	@ Starts a single trainer battle with pre-selected Pokémon.
+	@ This macro handles the party selection and restoration logic.
+	.macro trainerbattle_selectmons trainer:req, lose_text:req, post_battle_script:req
+		trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, LOCALID_NONE, \trainer, NULL, \lose_text, \post_battle_script, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+	.endm
+	
+	.macro trainerbattle_special trainer:req, lose_text:req, post_battle_script:req, num_pokemon:req
+	    special SavePlayerParty
+	    fadescreen FADE_TO_BLACK
+	    setvar VAR_0x8004, \num_pokemon
+	    special ChoosePartyForStandardBattle
+	    waitstate
+	    goto_if_eq VAR_RESULT, 0, 1f
+	    special ReducePlayerPartyToSelectedMons
+	    setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
+	    setvar VAR_0x8005, FRONTIER_DATA_SELECTED_MON_ORDER
+	    special CallFrontierUtilFunc
+	    trainerbattle_selectmons \trainer, \lose_text, \post_battle_script
+	    end
+	1:
+	    special LoadPlayerParty
+	    releaseall
+	    end
+	.endm	@ Starts a double battle with the player against two trainers
 	@ Takes two trainers and defeat text for each
 	.macro trainerbattle_two_trainers trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req
 	trainerbattle TRAINER_BATTLE_TWO_TRAINERS_NO_INTRO, OBJ_ID_NONE, \trainer_a, NULL, \lose_text_a, NULL, OBJ_ID_NONE, \trainer_b, NULL, \lose_text_b, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE

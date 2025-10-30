@@ -1326,7 +1326,14 @@ static void CB2_EndTrainerBattle(void)
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
-        if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InTrainerHillChallenge() || (!NoAliveMonsForPlayer()) || FlagGet(B_FLAG_NO_WHITEOUT))
+        if (TRAINER_BATTLE_PARAM.mode == TRAINER_BATTLE_CONTINUE_SCRIPT
+            || TRAINER_BATTLE_PARAM.mode == TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC
+            || TRAINER_BATTLE_PARAM.mode == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE
+            || TRAINER_BATTLE_PARAM.mode == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC)
+        {
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        }
+        else if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InTrainerHillChallenge() || (!NoAliveMonsForPlayer()) || FlagGet(B_FLAG_NO_WHITEOUT))
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
             SetMainCallback2(CB2_WhiteOut);
