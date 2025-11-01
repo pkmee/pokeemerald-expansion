@@ -773,11 +773,11 @@
 
 	@ Starts a single trainer battle with pre-selected Pokémon.
 	@ This macro handles the party selection and restoration logic.
-	.macro trainerbattle_selectmons trainer:req, lose_text:req, post_battle_script:req
-		trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, LOCALID_NONE, \trainer, NULL, \lose_text, \post_battle_script, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+	.macro trainerbattle_selectmons trainer:req, intro_text:req, lose_text:req, post_battle_script:req
+		trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, LOCALID_NONE, \trainer, \intro_text, \lose_text, \post_battle_script, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
 	.endm
-	
-	.macro trainerbattle_special trainer:req, lose_text:req, post_battle_script:req, num_pokemon:req
+
+	.macro trainerbattle_special trainer:req, intro_text:req, lose_text:req, post_battle_script:req, num_pokemon:req
 	    special SavePlayerParty
 	    fadescreen FADE_TO_BLACK
 	    setvar VAR_0x8004, \num_pokemon
@@ -788,7 +788,7 @@
 	    setvar VAR_0x8004, FRONTIER_UTIL_FUNC_SET_DATA
 	    setvar VAR_0x8005, FRONTIER_DATA_SELECTED_MON_ORDER
 	    special CallFrontierUtilFunc
-	    trainerbattle_selectmons \trainer, \lose_text, \post_battle_script
+	    trainerbattle_selectmons \trainer, \intro_text, \lose_text, \post_battle_script
 	    end
 	1:
 	    special LoadPlayerParty
