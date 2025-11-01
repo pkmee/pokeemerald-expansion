@@ -76,8 +76,11 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
+#include "constants/pokemon_icon.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "nuzlocke.h"
+#include "variant_colours.h"
 
 enum {
     MENU_SUMMARY,
@@ -4276,10 +4279,33 @@ bool32 SetUpFieldMove_Dive(void)
 
 static void CreatePartyMonIconSprite(struct Pokemon *mon, struct PartyMenuBox *menuBox, u32 slot)
 {
-    u16 species2;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
 
-    species2 = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-    CreatePartyMonIconSpriteParameterized(species2, GetMonData(mon, MON_DATA_PERSONALITY), menuBox, 1);
+    if (IsNuzlockeActive() && GetMonData(mon, MON_DATA_IS_DEAD, NULL))
+    {
+        // Create grey palette for dead pokemon icon
+        static u16 sGreyIconPal[16];
+        const u16 *originalPal = GetValidMonIconPalettePtr(species);
+
+        // Copy and apply grey effect to palette
+        CpuCopy16(originalPal, sGreyIconPal, sizeof(sGreyIconPal));
+        ApplyCustomRestrictionToPaletteBuffer(0, 255, 0, 100, 0, 150, sGreyIconPal);
+
+        // Load grey palette with unique tag for this party slot
+        struct SpritePalette greyPalette = { sGreyIconPal, POKE_ICON_BASE_PAL_TAG + 10 + slot };
+        LoadSpritePalette(&greyPalette);
+
+        // Create icon with grey palette
+        menuBox->monSpriteId = CreateMonIcon(species, SpriteCB_MonIcon, menuBox->spriteCoords[0], menuBox->spriteCoords[1], 4, personality);
+        gSprites[menuBox->monSpriteId].oam.paletteNum = IndexOfSpritePaletteTag(greyPalette.tag);
+        gSprites[menuBox->monSpriteId].oam.priority = 1;
+    }
+    else
+    {
+        CreatePartyMonIconSpriteParameterized(species, personality, menuBox, 1);
+    }
+
     UpdatePartyMonHPBar(menuBox->monSpriteId, mon);
 }
 
