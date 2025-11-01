@@ -155,7 +155,7 @@ Debug_Text_AllFlagsSet:
 	end
 
 Debug_EventScript_Script_2::
-    trainerbattle_special TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneDefeat, Debug_EventScript_PostBattleRestoreParty, 1
+    trainerbattle_special TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxanneIntro, RustboroCity_Gym_Text_RoxanneDefeat, Debug_EventScript_PostBattleRestoreParty, 1
     end
 
 Debug_EventScript_PostBattleRestoreParty::
