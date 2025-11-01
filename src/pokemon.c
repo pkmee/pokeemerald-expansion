@@ -46,6 +46,7 @@
 #include "text.h"
 #include "trainer_hill.h"
 #include "util.h"
+#include "nuzlocke.h"
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
@@ -2826,6 +2827,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_DAYS_SINCE_FORM_CHANGE:
             retVal = boxMon->daysSinceFormChange;
             break;
+        case MON_DATA_IS_DEAD:
+            retVal = boxMon->isDead;
+            break;
         default:
             break;
         }
@@ -2865,6 +2869,9 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
         SET16(mon->hp);
         hpLost = mon->maxHP - mon->hp;
         SetBoxMonData(&mon->box, MON_DATA_HP_LOST, &hpLost);
+        
+        // Check for Nuzlocke fainting
+        NuzlockeHandleFaint(mon);
         break;
     }
     case MON_DATA_HP_LOST:
@@ -2873,6 +2880,9 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
         SET16(hpLost);
         mon->hp = mon->maxHP - hpLost;
         SetBoxMonData(&mon->box, MON_DATA_HP_LOST, &hpLost);
+        
+        // Check for Nuzlocke fainting
+        NuzlockeHandleFaint(mon);
         break;
     }
     case MON_DATA_MAX_HP:
@@ -3240,6 +3250,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         }
         case MON_DATA_DAYS_SINCE_FORM_CHANGE:
             SET8(boxMon->daysSinceFormChange);
+            break;
+        case MON_DATA_IS_DEAD:
+            SET8(boxMon->isDead);
             break;
         }
     }
@@ -5974,7 +5987,17 @@ const u16 *GetMonFrontSpritePal(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
     bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    return GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality);
+    const u16 *pal = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality);
+
+    if (IsNuzlockeActive() && GetMonData(mon, MON_DATA_IS_DEAD, NULL))
+    {
+        static u16 sGreyPal[16];
+        CpuCopy16(pal, sGreyPal, sizeof(sGreyPal));
+        ApplyCustomRestrictionToPaletteBuffer(0, 255, 0, 100, 0, 150, sGreyPal);
+        return sGreyPal;
+    }
+
+    return pal;
 }
 
 const u16 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality)
@@ -7055,6 +7078,12 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
 
 void HealPokemon(struct Pokemon *mon)
 {
+    if (IsNuzlockeActive() && IsMonDead(mon))
+    {
+        // Don't heal dead Pokemon in Nuzlocke mode
+        return;
+    }
+    
     u32 data;
 
     data = GetMonData(mon, MON_DATA_MAX_HP);
@@ -7068,6 +7097,12 @@ void HealPokemon(struct Pokemon *mon)
 
 void HealBoxPokemon(struct BoxPokemon *boxMon)
 {
+    if (IsNuzlockeActive() && IsBoxMonDead(boxMon))
+    {
+        // Don't heal dead Pokemon in Nuzlocke mode
+        return;
+    }
+    
     u32 data;
 
     data = 0;

@@ -51,6 +51,8 @@
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "nuzlocke.h"
+#include "variant_colours.h"
 
 // Screen titles (upper left)
 #define PSS_LABEL_WINDOW_POKEMON_INFO_TITLE 0
@@ -4424,10 +4426,24 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
         (*state)++;
         return 0xFF;
     case 1:
-        LoadSpritePaletteWithTag(GetMonSpritePalFromSpeciesAndPersonality(summary->species2, summary->isShiny, summary->pid), summary->species2);
-        SetMultiuseSpriteTemplateToPokemon(summary->species2, B_POSITION_OPPONENT_LEFT);
+    {
+        u16 tag = summary->species2;
+        const u16 *pal = GetMonSpritePalFromSpeciesAndPersonality(summary->species2, summary->isShiny, summary->pid);
+
+        if (IsNuzlockeActive() && GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_IS_DEAD, NULL))
+        {
+            static u16 sGreyPal[16];
+            CpuCopy16(pal, sGreyPal, sizeof(sGreyPal));
+            ApplyCustomRestrictionToPaletteBuffer(0, 255, 0, 100, 0, 150, sGreyPal);
+            pal = sGreyPal;
+            tag = 0x2800 + sMonSummaryScreen->curMonIndex;
+        }
+
+        LoadSpritePaletteWithTag(pal, tag);
+        SetMultiuseSpriteTemplateToPokemon(tag, B_POSITION_OPPONENT_LEFT);
         (*state)++;
         return 0xFF;
+    }
     }
 }
 
